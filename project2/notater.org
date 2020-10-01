@@ -1,0 +1,59 @@
+* Oppgave
+- Build own Effective field theory that approximates the phase shifts from project1
+- Follows article
+- Pionless EFT to describe nucleon-nucleon scattering at low energies.
+  - A series of contact interactions
+  - domain of effective range expansion
+  - valid up to onshell-momentum k ~ m_pi / 2, about 10 MeV lab energy
+- Contact interactions look complicated, but are simplified wehn striking spin/isospin matrices.
+- Start by fitting the lowest order pionless interaction model.
+- For 1S0 channel, V1^LO(p, p') = C0
+  - Coupling constants are linear combinations of the coupling constants in the general expression
+  - Naively applied gives UV divergence, need regularization
+  - Sharp cutoff, tricky. Can give Gibbs overshot phenomena
+  - Use a smooth UV regulator V(p', p) = fl(p')V(p',p)fl(p)
+    with fl(p) = exp(-p^4/l^4)
+- Choose an appropriate value for Lambda and fit C0 to low energy phase shift
+- *Pionless, adding next order*
+  - V^NLO(p', p) = C2(p^2 + p'^2)
+  - Fit the parameters C0, C2 to the low energy phase shifts from project 1.
+- V^NNLO(p', p) = C4(p^4 + p'^4) + C'4p²p'²
+  + Fit the four parameters C0, C2, C4, C'4 to the low-energy phase shifts.
+  + Make plot of LO, NLO, NNLO phase shifts and compare them to the results from Project1 potential.
+  + Make a plot like Figure 3 in Lepage to show the power-low improvement with each additional order
+    From this, pick off the breakdown scale of Lambda_b where EFt stops improving with additional orders.
+    - "Lepage plots", showing where EFT is working as expected.
+  + Repeat NLO pionless fits for several different values of Lambda
+  + Make analogous plots to Fig. 4 in Lepage
+  + Commenct on error scaling
+- Lambda >> Lambda_b doesn't but anything, as the errors scale by
+  Delta(Q) ~ Max((Q/Lambda)^n, (Q/Lambda_b)^2)
+- *One-pion exchange term*
+- We expect Lambda_b ~ m_pi
+- Want to build a toy EFT which works at higher energies.
+- Include longest ranged Yukawa potential as an explicit degree of freedom in our EFT
+-+ Repeat 2a-2b) by including the simple one-pion exchange contribution and refit contact term couplings
+- VLO(p,p') = Vpi(p,p') + C0
+- VNLO(p,p') = Vpi(p,p') + C0 + C2(p² + p²')
+- With analogous form for the NNLO potential(?)
+  - Jeg antar V^NNLO(p',p) = Vpi(p,p') + C0 + C4(p^4 + p'^4) + C'4p²p'²
+  + Redo 2a-2b, modify Lambda to appropriate value
+  + Redo analysis of 2C, comment on similarities/differences
+
+    
+* Notates
+  - Low energy behavior is independent of the details of the short-distance dynamics
+    - Scattering process insensitive to the details of the potential
+    - Can replace the short distance potential with a simpler form to simply calculation without loss
+  - Nucleons interact by exchanging pion particle.
+    - At low energies the interaction can described by a contact potential (delta potential)
+  - Using a simpler potential in LS can result in UV divergence, need
+    regularization to cut off the high-momentum modes.
+    
+* Møte
+Hei:)
+Jeg vet ikke helt hvor jeg skal begynne.
+Jeg har slitt mentalt den siste tiden
+Jeg har fortsatt ikke fått gjort ferdig spesialpensum, selv med hele sommeren på
+meg. Det er bare så himmla teit
+  

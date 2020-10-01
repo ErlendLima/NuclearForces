@@ -1,0 +1,80 @@
+\message{ !name(../main.tex)}%-------------------- begin preamble ----------------------
+%\documentclass[12pt]{article}
+\documentclass[12pt, a4paper, abstracton]{scrartcl}
+%\setkomafont{disposition}{\normalfont\bfseries}
+\usepackage{Setup/style}
+\input{Setup/macros}
+\addbibresource{bibliography.bib}   % Bibliography
+ %---------- included files ------------------------
+\includeonly
+{
+    Sections/Frontpage,
+    Sections/Abstract,
+    Sections/Introduction,
+    Sections/Theory, 
+    Sections/Methods,
+    Sections/Results,
+    Sections/Discussion,
+    Sections/Conclusion,
+    %Sections/Future,
+}
+
+%-------------------- end preamble ----------------------
+
+%-------------------- main content ----------------------
+\begin{document}
+
+\message{ !name(Sections/Theory.tex) !offset(-27) }
+\section{Theory}\label{sec:Theory}
+
+\newcommand{\pin}{\psi_\text{in}}
+\newcommand{\pout}{\psi_\text{out}}
+Quantum scattering is a very complicated process, behaving so differently from the
+classical case of billiard balls that our intuition breaks down. Fortunately, the intricacies of
+the scattering process itself can be conveniently omitted by instead focusing on
+the relationship between the initial and resulting states.
+Specifically, the true state \(\ket{\psi}\) is related to the asymptotic
+incoming and outgoing states \(\ket{\psi_{}}\)
+asymptotic free motion \(\ket{\chi}\) of a particle leaving an interaction and 
+asymptotic free initial state \(\ket{\psi}\) 
+
+\begin{equation*}
+ w(\psi \to \chi) = \left| \mel{\chi}{\mathcal{S}}{\psi} \right|
+\end{equation*}
+
+\subsection{The Yukawa Potential}
+[HISTORY]
+
+\subsubsection{Momentum Basis}
+
+Going from position basis to momentum space requires a change of basis, achieved
+through a Fourier transform. The problem is multidimensional, requiring a
+generalized Fourier transform. Since the Yukawa potential is radially 
+symmetric, the Hankel transform can be used:
+
+\newcommand{\kp}{k^\{\prime\}}
+\begin{equation*}
+  V_{l}(k, \kp) = \int_{0}^{\inf} \d r r^{2}
+\end{equation*}
+
+expressing the potential as a
+weighted s
+
+\subsection{The Lippman-Schwinger Equation}
+
+
+\subsection{R-Matrix}\label{sec:Rmatrix}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:
+
+\message{ !name(../main.tex) !offset(-11) }
+
+\end{document}
+% ------------------- end of main content ---------------

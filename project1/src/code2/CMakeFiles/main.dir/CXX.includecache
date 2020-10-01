@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/erdos/gits/nuclearforces/project1/src/code2/code.cpp
+cmath
+-
+fstream
+-
+iostream
+-
+armadillo
+-
+iomanip
+-
+stdio.h
+-
+stdlib.h
+-
+

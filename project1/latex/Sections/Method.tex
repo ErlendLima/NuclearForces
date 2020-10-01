@@ -1,0 +1,183 @@
+\section{Method}\label{sec:Method}
+
+\subsection{Discretizing Lippman-Schwinger}
+
+The equation [REF] can be solved numerically by iteration. To this end it is
+discretized through a series of steps. The principal value poses a problem due to the limited precision of computers.
+To step around this, the integral is rewritten. The function
+\(\frac{1}{k-k_{0}}\) is even about \(k_{0}\), hence having parts of the curve
+above and below the \(x\)-axis, meaning
+
+\begin{align*}
+  \int_{-\infty}^{\infty}\frac{\dd k}{k-k_{0}} = 0.
+\end{align*}
+Breaking the integral into its positive and negative parts and performing the
+substitution \(k\to -k\) in the negative part then yields
+\begin{align*}
+  \int_{0}^{\infty}\frac{\dd k}{k^{2}-k_{0}^{2}} = 0
+\end{align*}
+
+The principal value can now be expressed as
+
+\begin{align*}
+  \mathcal{P}\int_{0}^{\infty}\frac{f(k)}{k^{2}-k_{0}^{2}} \dd k = \int_{0}^{\infty}\frac{f(k)-f(k_{0})}{k^{2}-k_{0}}\dd k
+\end{align*}
+The integral is no longer singular at \(k_{0}\), instead being proportional to
+\(\dv{f}{k}\), allowing it to be computed numerically.
+
+In particular, [REF] can be recast to the form
+
+\begin{align*}
+  K(k, k^{\prime}) = V(k, k^{\prime}) + \frac{2}{\pi}\int_{0}^{\infty}
+  \dd q \frac{q^{2}V(k,q)K(q,k^{\prime} - k^{2}_{0}V(k, k_{0})K(k_{0},k^{\prime})}{(k_{0}^{2}-q^{2})/m}
+\end{align*}
+
+The integral is approximated through
+\begin{equation*}
+  \int_{-1}^{1}f(x)\dd x \approx \sum_{i=1}^{N}f(x_{i})w_{i}
+\end{equation*}
+for N lattice points through the corresponding weights \(w_{i}\) and points
+\(x_{i}\in [-1, 1]\). This is done through Gaussian-Legendre quadrature, using
+Legendre polynomials to construct the weights and corresponding points. To map
+the integral from \([-1, 1]\) to \([0, \inf]\), the points and weights are
+transformed by
+
+\begin{align*}
+  k_{i} &= C\times \tan{\frac{\pi}{4}(1+x_{i})}\\
+  w_{i} &= C\times \frac{\pi}{4}\frac{w_{i}}{\cos^{2}\left( \frac{\pi}{4}(1-x_{i}) \right)}
+\end{align*}
+where \(C\) is a constant to fix the units.
+
+Applied to our problem, it is discretized into
+
+\begin{align*}
+  K(k, k^{\prime}) = V(k, k^{\prime}) + \frac{2}{\pi}\sum_{i=1}^{N}
+  \frac{w_{j}k_{j}^{2}V(k, k_{j})K(k_{j},k^{\prime})}{(k_{0}^{2}-k_{j}^{2})/m}
+  - \frac{2}{\pi}k_{0}^{2}V(k, k_{0})K(k_{0},k^{\prime})\sum_{n=1}^{N}
+  \frac{w_{n}}{(k_{0}^{2}-k_{n}^{2})/m}.
+\end{align*}
+
+There are \(N\times N\) unknowns for \(K(k, k^{\prime})\), plus 1 for \(K(k_{0},
+k_{0})\), for a total of \(N+1\) unknowns. They can be described by a single
+extended \(K\)-matrix. Defining another matrix \(A\) as
+\begin{align*}
+  A_{i,j} &= \delta_{i,j} - V(k_{i}, k_{j})u_{k}\\
+  \intertext{with}\\
+            u_{j} &= \frac{2}{\pi} \frac{w_{j}k_{j}^{2}}{(k_{0}^{2}-k_{j}^{2})/m}
+                    \qquad \text{for } j = 1, 2, \ldots, N \\
+  u_{N+1} &= - \frac{2}{\pi}\sum_{j=1}^{N}\frac{k_{0}^{2}w_{j}}{(k_{0}^{2}-k_{j}^{2})/m}.
+\end{align*}
+The implementation of this main loop is shown in~\cref{list:kmatrix}
+
+\begin{listing}
+\begin{minted}[linenos,mathescape=true,fontsize=\small,breaklines,escapeinside=||]{julia}
+function createA(V, k, ω, m)
+    N = length(k)-1
+    k₀ = k[end]
+    A = diagm(0 => repeat([1.0,], N+1))
+    uⱼ = 0.0
+
+    @inbounds for j in 1:N+1
+        uⱼ = 0.0
+        if j ≠ N+1
+            uⱼ = 2/π * ω[j]*k[j]^2/((k₀^2 - k[j]^2)/m)
+        else
+            for n in 1:N
+            uⱼ += ω[n]*k₀^2/((k₀^2 - k[n]^2)/m)
+            end
+            uⱼ *= -2/π
+        end
+
+        for i in 1:N+1
+            A[i, j] -= V[i, j] * uⱼ
+        end
+    end
+    return A
+end
+\end{minted}
+\label{list:kmatrix}
+\caption{The main loop of the \(K\)-matrix method.}
+\end{listing}
+
+The equation can now be rendered as the matrix equation
+
+\begin{align*}
+  AK = V.
+\end{align*}
+
+Solving for \(K\) then simply amounts to inverting \(A\) and computing the
+product
+
+\begin{equation}
+  K = A^{-1}V.\label{eq:matrixeq}
+\end{equation}
+
+As known from [REF], the diagonal of \(K\) is proportional to the phase shift
+\begin{align*}
+  K(k_{N+1}, k_{N+1}) = K(k_{0}, k_{0}) = -\frac{1}{mk_{0}}\tan\delta_{0}(k_{0})
+\end{align*}
+
+The number of mesh points \(N\) controls both the accuracy and the computation
+resources, demanding more memory and time as \(N\) increases. Running over the
+\((N+1)\times (N+1)\) matrices scales as roughly \(\mathcal{O}(N+1)^{2}\) in
+both time and memory allocation. This is the expected behavior to compare to
+when measuring its actual resource usage.
+
+\subsection{Variable Phase Approach}
+In contrast to the LS approach, implementing the variable phase approach is
+straightforward. Julia has a very good differential equations solver
+\href{https://diffeq.sciml.ai/stable/#Getting-Started:-Installation-And-First-Steps}{DifferentialEq.jl}\cite{rackauckas2017differentialequations}, which is used for the actual computation.
+Since the limit in the relation \(\delta(k) =
+\lim_{\rho\to\infty}\delta(k, \rho)\) can not be taken to infinity on a computer, 
+\(\rho\) is instead substituted with a very large number, like \(5\). There is a
+trade-off between accuracy and computation time, with smaller \(\rho\) giving
+lesser accuracy while taking shorter time to compute, assuming the same step
+length is being used. To find the optimal \(\rho\), several values were tried
+and the result compared to a high \(\rho\).
+
+The code implementation is shown in~\cref{lst:vpa}
+
+\begin{listing}
+  \begin{minted}[linenos,mathescape=true,fontsize=\small,breaklines,escapeinside=||]{julia}
+struct VPA <: Method
+  rspan::Tuple{Float64, Float64}  # Range of the interaction
+end
+VPA() = VPA((1e-4, 15.0))
+
+
+function (vpa::VPA)(k, m, V::Potential)
+    m = m/2
+
+    function dδdr(δ, p, r)
+      -1.0/k * 2.0m * V(r) * sin(k*r + δ)^2
+    end
+
+    δ0 = 0.0
+
+    prob = ODEProblem(dδdr, δ0, vpa.rspan)
+    sol = solve(prob, maxiters=10000, reltol=1e-8)
+
+    δ = sol.u[end]
+end
+  \end{minted}
+  \caption{Implementation of VPA in Julia [Fix stupid UTF8]}
+  \label{lst:vpa}
+\end{listing}
+
+\subsection{The Potentials}
+
+Two potentials are examined: the square well and the Reid potential. The former
+has analytical solutions and is relatively simple to understand, and will be
+used as a check on the implementation of the methods and to illustrate concepts
+discussed in the theory. The latter is more complicated, being a sum of three
+Yukawa potentials with the intent on modeling NN-interactions, with coefficients
+fitted to data. 
+
+Their precise implementation is not interesting, but is available in the file
+\textsf{potentials.jl}. 
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

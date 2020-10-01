@@ -1,0 +1,106 @@
+* Skrevet
+Wavefunction asymptotically vanish at long range.
+
+Scattering states are dictated (?) by boundary conditions on incoming and outgoing part.
+
+Lippmann-Schwinger equation is most convenient to describe scattering states.
+
+Cross sections can be obtained from experiments
+ - Related to phase shift of scattered particles.
+ - 
+Phase shift is a bridge between theory and experiments.
+
+Phase shifts are related to the R-matrix.
+ - R-matrix obtained from LS equation
+ - Principal value of R-matrix can cause divergence
+   and matrix manipulation is difficult for large dimensions.
+ - Variable Phase approach can obtain phase shift by integrating diff equation, 
+   - limited to local potential without tensor interaction
+
+1S0 state of nucleon-nucleon scattering
+
+* Oppgaven
+
+ - Goal to solve LP for two interacting nucleons and
+ relate the obtained phase shifts with those extracted from experimental cross
+ section.
+- Models a proton - neutron interaction with a parametrized potential
+ for partial wave 1S0, Spin = 0, orbital momentum = 0, a singlet S-state.
+- |sym| l |
+  |---+---|
+  | s | 0 |
+  | p | 1 |
+  | d | 2 |
+  | f | 3 |
+
+- Reid potential
+- Derivation of LS
+- Scattering states, E > 0
+- Gives a reaction matrix
+- E = k0^2/m
+- P indicates Cauchy principal value prescription to avoid singularities
+- Solve LS in momentum space
+- Need to transform the potential to momentum space through a Hankel Transform
+- Transforms Reid
+- Remove P by a trick
+- Obtain the reaction matrix by discretizing and iterate
+- Compare to paper
+- VPA limited to to local potentials (d(r-r')V(r) = <r'|V|r>) and
+  without tensor forces.
+- Implement VPA and show that it reproduces phase shifts for the square well.
+- Apply VPA to Reid for proton-neutron scattering (nucleon-nucleon?)
+- Show from equation that attractive potential gives positive phase shift
+  and repulsive gives negative. 
+- S-wave phase shifts change from positive to negative values at Elab = 270 MeV
+  in 1S0 partial wave (why??) imply a strong short-range repulsion for local NN
+  potentials. 
+- VPA has Levinson's theorem built in. Show how.
+
+* Oppsummering
+  
+  Potential in momentum space. Parametrized potential between a proton and neutron for
+the partial wave 1S0, spin S = 0, orbital momentum l = 0, singlet S state. This
+state has no bound state for the deuteron. 
+
+- Find the potential in momentum Space
+- Evaluate the phase shifts
+  - Compare to Nijmegen group
+Variable phase approach, consider only S-waves
+- Show that a fully attractive potential gives a positive phase shift, repulsive
+  a negative.
+- VPA builds in Levinson's theorem. Why?
+
+* Oppgaven 1.0
+ - Lippmann-Schwinger describes scattering states
+ - Cross sections are related to phase shifts of the scattered particles
+ - Phase shift related to R-matrix
+   - Obtained from LS.
+ - Variable phase approach more limited.
+ - Utled R-Matrix
+ - Uteld VPA
+ - Exponential potential
+ - Square well potential
+ - Transform til momentum space
+ - Both methods used to calculate the phase shift at different scattering energies
+ - Plot:
+   - Phase shift vs kinetic energy in lab frame
+     - Both R-Matrix and VPA
+     - delta / deg vs T_lab / MeV
+ - Maximum phase shift at about 61 deg when E_lab = 6 MeV
+ - 0 at 250 MeV
+ - No resonances or bound states
+ - Analytical solurtion for phase shift delta-k for Square Well
+   - Mismatch due to multiplicity of function f(x) = cot(x)
+   - Does not affect the result
+   - k*cot(delta(k)) vs k, delta(k) vs k
+   - Rmax = 5.0, R = 1 fm, V0 = 4.0 fm-1
+ - sin²(x) > 0 always hold => V0 positive => phase shift decrease for increasing r
+   - hence, fully attractive potential gives positive phase shift, repulsive gives negative
+ - max(VPA) = 2MV/k. As k-> inf, this -> 0. Integration yields d(k_inf) = 0.
+   - At sufficient energies, the high speed proton travels so fast it doesn't feel the potential.
+ - In Levinson's theorem: delta(k=1) - delta(k_inf) = n\pi
+   - d(0) = n\pi
+ - Plots:
+   - Phase shifts for square well at differnt depths. Depths adjusted near threshold where first bound state emerges
+   - Phase shift increase sharply and exceeds 3.14 at V0 = 1.24 fm^-1.
+     - First bound state
