@@ -1,3 +1,0 @@
-/home/erdos/gits/nuclearforces/project1/src/code2/CMakeFiles/rebuild_cache.dir
-/home/erdos/gits/nuclearforces/project1/src/code2/CMakeFiles/edit_cache.dir
-/home/erdos/gits/nuclearforces/project1/src/code2/CMakeFiles/main.dir
