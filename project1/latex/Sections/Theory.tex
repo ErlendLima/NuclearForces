@@ -106,7 +106,7 @@ scattering amplitude as
   \mel{\vb{p}^{\prime}}{\scat}{\vb{p}} = \delta(\vb{p}^{\prime} - \vb{p}) - \frac{i}{2\pi m}\delta(E_{p^{\prime}}-E_{p})f(\vb{p}^{\prime}\leftarrow \vb{p}).
 \end{align*}
 
-\subsection{The Spherical Case}
+\subsection{Spherical Coordinates}
 
 Introducti
 
@@ -134,6 +134,9 @@ purely real with an inherent ambiguity modulo \(\pi\), as seen from
 \begin{align*}
   \exp(2i[\delta_{l}+n\pi]) = \exp(2i\delta_{l})\exp(2in\pi) = \exp(2i\delta_{l}).
 \end{align*}
+
+[Meaning of T in the sense incident plane wave]
+[]
 
 The decomposition of \(f(\vb{p}^{\prime}\leftarrow\vb{p})\) into partial waves
 can be obtained by exploiting the relation
@@ -177,32 +180,175 @@ The maximal value is only reached if
 \(\delta_{l}\) is an odd multiple of \(\pi/2\)
 
 \subsection{Green's Function}
-[Introduce motivation for free and full Green]
+One of the most important tools in scattering theory is \textit{the resolvent},
+or \textit{Green's operator}. For many types of integral equations, a Green's
+function can be associated, transforming the solving of the equation to the
+computation of the Green's function. For our purposes the most important Green's
+operators are the \textit{free Green's operator}
 
-[Trivially derive LS]
+\begin{equation*}
+  \oop{G}^{0}(z) \equiv (z-\oop{H}^{0})^{-1}
+\end{equation*}
+and the \textit{full Green's operator}
+\begin{equation*}
+  \oop{G}(z) \equiv (z-\oop{H})^{-1}
+\end{equation*}
+with \(z\in\mathbb{C}\). Without loss of generality, assume the spectrum of
+\(\oop{H}\) is discrete, with the orthonormal basis \({\ket{n}}\). Then the full
+Green's operator can be written
+
+\begin{equation*}
+  \oop{G}(z) = (z-\oop{H})^{-1}1 = \sum_{n}\frac{\op{n}}{z-E_{n}}.
+\end{equation*}
+A specific matrix element is therefore
+\begin{equation*}
+  \mel{\chi}{\oop{G}(z)}{\psi} =\sum_{n} \frac{\ip{\chi}{n}\ip{n}{\psi}}{z-E_{n}}.
+\end{equation*}
+\newcommand{\gop}{\oop{G}(z)}
+\newcommand{\mgop}{\(\oop{G}(z)\)}
+For any \(z\) not an eigenvalue \(E_{n}\), the matrix element is well defined and
+analytic. When \(z\) is an eigenvalue, it is a simple pole with residue
+\(\ip{\chi}{n}\ip{n}{\psi}\). That is, knowing the poles of \(\oop{G}(z)\) gives
+information about the corresponding eigenvectors. As both the energy
+eigenvectors and eigenvalues can be found from \mgop{} itself, knowledge of
+\mgop{} is equivalent to solving the eigenvalue problem of
+\(\oop{H}\)\footnote{Of course, this is merely an intuitive explanation, not a
+  proof. It can be shown that this is indeed true in the general case.}.
+
+While discrete spectra lead to poles in \(\mel{\chi}{\gop{}}{\psi}\), continuous spectra lead to 
+branch cuts. Consider the free Green's operator, which in terms of the angular
+momentum eigenvectors in analogy to the discrete spectrum has the matrix elements
+
+\begin{equation*}
+  \mel{\chi}{\oop{G}^{0}(z)}{\psi} = \int_{0}^{\infty}\frac{\dd E}{z-E}\left\{
+  \sum_{l,m}\ip{\chi}{Elm}\ip{Elm}{\psi}
+  \right\}
+\end{equation*}
+
+which again gives well-defined functions for \(z\notin\mathbb{R}^{+}\). For any
+\(E^{0} > 0\), the integral diverges. This can be seen by taking the difference
+between approaching the axis from the top and approaching it from the bottom,
+which can be shown to yield \(2\pi i \sum_{lm}\op{Elm}\).
+
+The scattering process can yield both scattered states and bound states. The
+former is associated with continuous spectra while the latter with discrete.
+From the discussion above, scattered states are associated with branch cuts
+along \(E^{0}>0\) while bound states show up as simple poles in \(\oop{G}(z)\).
+
+Finding \(\oop{G}(z)\) is just as difficult as solving the eigenvalue problem
+for \(\oop{H}\). Using \(\oop{G}(z)\), however, yields an alternative numerical
+approach while at the same providing a powerful theoretical tool. The first step
+is to write \(\oop{G}(z)\) in terms of the simpler \(\oop{G}^{0}(z)\). This is
+trivially done using the algebraic relation
+
+\begin{equation*}
+  \oop{A}^{-1} = \oop{B}^{-1} + \oop{B}^{-1}(\oop{B}-\oop{A})\oop{A}^{-1}.
+\end{equation*}
+Inserting \(\oop{A} = z-\oop{H}\) and \(\oop{B} = z-\oop{H}^{0}\) gives
+\begin{equation}
+  \label{eq:LSG}
+  \gop = \gop{}^{0} + \gop{}^{0}V\gop{} = \gop{}^{0} + \gop{}V\gop{}^{0}.
+\end{equation}
+This is known as the \textit{Lippmann-Schwinger equation for \mgop{}}.
+
 
 \subsection{Lippman Schwinger}
-[Use LS for G to derive it for T]
+
+The Lippmann-Schwinger equation turns out to be a common and useful relation
+between operators in scattering theory. The derivation through Green's operators
+is not the historic path, and has the downside of obscuring its physical
+relationship to the Schr\"odinger equation.
+[Mer historie]
+
+[intro]
+Out of thin air we define the operator \(\oop{T}\) as the potential plus the
+distortion to the potential caused by the full Green's operator:
+
+\begin{equation}
+  \label{eq:T}
+  \oop{T}(z) = V + V\oop{G}V.
+\end{equation}
+It is clear that \(\oop{T}(z)\) has the same properties as \mgop{} with respect
+to poles and branch cuts. Combining~\eqref{eq:T} with~\eqref{eq:LSG} together
+with some algebraic manipulations, we obtain the Lippmann-Schwinger equation for \(\oop{T}(z)\):
+
+\begin{equation}
+  \label{eq:LST}
+ \oop{T}(z) = V + V\oop{G}^{0}(z)\oop{T}(z).
+\end{equation}
+
+In momentum space~\eqref{eq:LST} is written as
+
+\begin{equation*}
+  \mel{\vb{p}^{\prime}}{\oop{T}(z)}{\vb{p}} = \mel{\vb{p}^{\prime}}{V}{\vb{p}}
+  + \int\dd^{3}p^{''} \frac{\mel{\vb{p}}{V}{\vb{p^{''}}}}{z-E_{p^{''}}}\mel{\vb{p}^{''}}{T(z)}{\vb{p}}
+\end{equation*}
+
+This highlights the need for introducing the \(\oop{T}\) operator in the first
+place. There is no LS equation for the \(\oop{S}\) because it requires the
+operators to be smooth functions, while \(\oop{S}(z)\) is
+highly singular. On the other hand \(\oop{T}\) analytic almost everywhere,
+allowing it to be expressed in terms of an integral equation. 
+
+Through a long and rather limit-finicky derivation, the \moop{S} operator can be
+derived in terms of the \moop{T} operator when \(z\) approaches the real axis
+from above
+\begin{equation*}
+  \mel{\vb{p}\prime}{S}{\vb{p}} = \delta(\vb{p}^{\prime}-\vb{p}) -2\pi i\delta(E_{p^{\prime}}-E_{p})
+  \lim_{\epsilon\downarrow 0}\mel{\vb{p}^{\prime}}{T(E_{p}+i\epsilon)}{\vb{p}}.
+\end{equation*}
+This relation being the main motivation for defining \moop{T} in the first
+place. It shows that \(t(\vb{p}^{\prime}\leftarrow\vb{p})\) corresponds to the
+on-shell \(T\)-matrix.
+
+A reasonable question to ask is why computing the entire \(T\)-matrix is
+necessary when only the on-shell elements are physical. As already mentioned,
+one reason is computational; The on-shell elements are the limiting quantities
+of the off-shell elements. This doesn't mean that the off-shell elements are
+only a mathematical necessity. In fact, they correspond to the virtual
+interactions in the scattering process, which accounts for their fundamental
+unmeasurable nature. We are only allowed to observe the scattering in the
+non-interacting region, being the limiting case of the unobservable processes
+happening inside of the interacting region. Our initial starting point of
+focusing on the asymptotic states while ignoring the intricacies of the
+scattering is therefore not some mathematical trick to make computation easier,
+but an unavoidable requirement.
 
 \subsection{The K-Matrix}
-[This section was written before I understood the connection between K and T.
-Use it to motivate the introduction and resulting computation of K]
 
-To actually obtain the phase shifts numerically, we turn to yet another matrix,
-the \(K\)-matrix\footnote{The nomenclature of the \(K\)-matrix is a mess. It is
-  also called the \(R\)-matrix, the \(T\)-matrix, the reaction matrix, the
-  reactance matrix, the dampening matrix, the distortion matrix, and Heitler's
-  matrix. To avoid overworking any of the other
-  letters, I follow the style of Taylor.}. Its associated operator\ \moop{M} is the Caley transform of
-\moop{S}, ensuring\ \moop{M} is Hermitian:
+The Lippmann-Schwinger equation for \(\oop{T}\) can not be solved by simple
+analytical methods. One recourse is to use approximation techniques. These are
+based on the expansion of \(\oop{T}\) into the 
+infinite sum
+\begin{equation*}
+  \oop{T} = V + V \frac{1}{E-H^{0}+i\epsilon}V + V \frac{1}{E-H^{0}+i\epsilon}V \frac{1}{E-H^{0}+i\epsilon} V+\ldots
+\end{equation*}
+The unitarity condition of \(\oop{T}\) is satisfied for the whole series, but
+violated for any finite order. If the series happens to be rapidly convergent,
+it may not pose a problem for numerical methods\footnote{That is to say, if the
+  process described is sufficiently inelastic, energy will be approximately
+  conserved.~\cite{Le_Ru_2013}}. Nevertheless, a more stable
+approach is to enforce unitarity. The Caley 
+transform achieves this, whereby a operator is constructed in such a way as to
+ensure unitary.
+
+The Caley transform of \(\oop{S}\) is denoted by \(\oop{M}\), and is defined
+as
 
 \begin{equation*}
   \oop{M} = i \frac{1-\oop{S}}{1+\oop{S}}.
 \end{equation*}
-The \(K\)-matrix is defined as the matrix elements of\ \moop{M}
+The \(K\)-matrix\footnote{The nomenclature of the \(K\)-matrix is a mess. It is
+  also called the \(R\)-matrix, the \(T\)-matrix, the reaction matrix, the
+  reactance matrix, the dampening matrix, the distortion matrix, the dissipative
+  matrix, and Heitler's
+  matrix. To avoid overworking any of the other
+  letters, I follow the style of Taylor.} is the matrix elements of the\
+\moop{M} operator:
 \begin{equation*}
   \mel{\vb{p}^{\prime}}{\oop{M}}{\vb{p}} = \delta(E_{p^{\prime}}-E_{p})k(\vb{p}^{\prime}\leftarrow\vb{p}).
 \end{equation*}
+
 When\ \moop{S} is symmetric,\ \moop{M} is both Hermitian and
 symmetric, implying its matrix elements are real.
 As with\ \moop{S} and\ \moop{R}, \moop{M} becomes diagonal in the basis
@@ -292,6 +438,7 @@ Bessel functions instead of sines and cosines. } can be used. For
 \begin{equation*}
   V_{l}(k, \kp{}) = \int_{0}^{\infty}j_{0}(kr)V(r)j_{0}(k^{\prime}r)r^{2}\dd r .
 \end{equation*}
+
 
 [Square well in momentum basis]
 
