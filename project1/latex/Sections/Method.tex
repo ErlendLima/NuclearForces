@@ -1,6 +1,7 @@
 \section{Method}\label{sec:Method}
 
 \subsection{Discretizing Lippman-Schwinger}
+\label{sec:discret}
 
 The equation [REF] can be solved numerically by iteration. To this end it is
 discretized through a series of steps. The principal value poses a problem due to the limited precision of computers.
@@ -70,7 +71,7 @@ extended \(K\)-matrix. Defining another matrix \(A\) as
 The implementation of this main loop is shown in~\cref{list:kmatrix}
 
 \begin{listing}
-\begin{minted}[linenos,mathescape=true,fontsize=\small,breaklines,escapeinside=||]{julia}
+\begin{minted}[linenos,mathescape=true,fontsize=\tiny,breaklines,escapeinside=||]{julia}
 function createA(V, k, ω, m)
     N = length(k)-1
     k₀ = k[end]
@@ -83,7 +84,7 @@ function createA(V, k, ω, m)
             uⱼ = 2/π * ω[j]*k[j]^2/((k₀^2 - k[j]^2)/m)
         else
             for n in 1:N
-            uⱼ += ω[n]*k₀^2/((k₀^2 - k[n]^2)/m)
+                uⱼ += ω[n]*k₀^2/((k₀^2 - k[n]^2)/m)
             end
             uⱼ *= -2/π
         end
@@ -138,7 +139,7 @@ and the result compared to a high \(\rho\).
 The code implementation is shown in~\cref{lst:vpa}
 
 \begin{listing}
-  \begin{minted}[linenos,mathescape=true,fontsize=\small,breaklines,escapeinside=||]{julia}
+\begin{minted}[linenos,mathescape=true,fontsize=\tiny,breaklines,escapeinside=||]{julia}
 struct VPA <: Method
   rspan::Tuple{Float64, Float64}  # Range of the interaction
 end
@@ -160,7 +161,7 @@ function (vpa::VPA)(k, m, V::Potential)
     δ = sol.u[end]
 end
   \end{minted}
-  \caption{Implementation of VPA in Julia [Fix stupid UTF8]}
+  \caption{Implementation of VPA in Julia}
   \label{lst:vpa}
 \end{listing}
 
@@ -180,4 +181,5 @@ Their precise implementation is not interesting, but is available in the file
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
+%%% TeX-engine: xetex
 %%% End:

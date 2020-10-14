@@ -414,15 +414,36 @@ The Yukawa potential was later generalized into a class of \textit{generalized
 \end{equation*}
 for some coefficients \(C_{i}\) and \(\eta_{i}\).
 
-A specific instance of a generalized Yukawa potential is the \textit{Reid potential}. It
-is a parameterized potential between a proton and a neutron for the partial wave
-\(^{1}S_{0}\), consisting of three terms:
+A specific instance of a generalized Yukawa potential is the \textit{Reid
+  potential}\cite{reid}. It was an incremental improvement on already existing potentials
+at that time, building a parameterized potential where the exponent in each term reflects some
+phenomenological properties of the nuclear force while the constants are fit to
+phase shift data without consideration for their physical interpretation.
+In the case of proton-neutron scattering, the potential for the partial wave
+\(^{1}S_{0}\) consists of the three terms:
 \begin{equation*}
   V(r) = V_{a}\frac{e^{-ax}}{x} + V_{b}\frac{e^{-bx}}{x} + V_{c}\frac{e^{-cx}}{x}
 \end{equation*}
 where \(x=\mu r\), \(\mu=0.7\) MeV, \(V_{a}=-10.463\) MeV, \(V_{b}=-1650.6\)
 MeV, \(V_{c}=6484.3\) MeV, and \(a=1\), \(b=4\) and \(c=7\).
-[History of Reid].
+
+The individual terms are plotted in~\cref{fig:reid} along with their sum. Its
+construction becomes apparent, where the three terms interact to form its three
+main features: it is a short range potential, quickly falling off to zero with a
+range , with
+an attractive region followed by a strongly repulsive region.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[]{Figures/reid.pdf}
+  \caption{\label{fig:reid} The Reid potential (full stroke), a sum of three Yukawa potentials
+  (dashed). It is has the typical characteristics of a nuclear force model, with
+  a short range attractive potential followed by a repulsive core.}
+\end{figure}
+
+The Reid potential for \(np\) \(^{1}S_{0}\) was fit to two thousand data points
+for the phase shift in the region \(0-350\) MeV, and thus should provide a good
+fit in this region.
 
 \subsubsection{Momentum Basis}
 
@@ -450,4 +471,5 @@ Bessel functions instead of sines and cosines. } can be used. For
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../main"
+%%% TeX-engine: xetex
 %%% End:

@@ -35,13 +35,15 @@
 %---- fonts and typography ------
 %\usepackage{lmodern}           % Latin Modern
 \usepackage{kpfonts}
+%\usepackage[nott]{inconsolata}
+\setmonofont{JuliaMono}
 \usepackage[final]{microtype}  % Improved typography
 \usepackage{enumitem}          % Format lists
 \setlist[itemize]{font = \upshape, before = \leavevmode}
 \setlist[enumerate]{font = \upshape, before = \leavevmode}
 \setlist[description]{font = \bfseries\sffamily, before = \leavevmode}
 \usepackage{siunitx}
-\usepackage{latexsym,exscale,stmaryrd,amsmath,amssymb}
+\usepackage{latexsym,exscale,stmaryrd,amsmath,amssymb,gensymb}
 \usepackage{unicode-math}
 %\setmonofont{FreeMono}
 % \usepackage{newunicodechar}
@@ -61,7 +63,7 @@
 \sectionfont{\centering \color{black}} %centering and color
 \subsectionfont{\color{black}}  % sets color of subsections
 \subsubsectionfont{\color{black}}
-
+\usepackage{placeins}
 %--------- physics ----------------------
 \usepackage{simpler-wick}
 \usepackage{physics}
