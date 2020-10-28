@@ -1,11 +1,11 @@
 \section{Results and Discussion}\label{sec:Results}
 
 \subsection{The Square Well Potential}
-The square well has an analytical form for the phase shift which can be compared
-to the result of VPA. A well with the arbitrary depth of \SI{4}{MeV} is used as
-example, with the computed curves shown in~\cref{fig:squarewell}. The curves
+The phase shift of the square well is found by VPA and compared to the analytical form.
+A well with the arbitrary depth of \(V_{0}=4.0\) is used as
+example, with the computed curves shown in~\cref{fig:analyticalcot}. The curves
 overlap, but the analytical solution
-has a jump at \(\approx 2.8\) MeV, stemming from the inherent modulo \(\pi\)
+has a jump at \(k\approx 2.8\), stemming from the inherent modulo \(\pi\)
 ambiguity. The transformation \(k\cot\delta\) lifts this ambiguity while fixing
 the phase shift to \(0\) at \(k=0\), plotted in the lower panel of the figure.
 Once transformed the curves overlap perfectly, as expected.
@@ -15,7 +15,7 @@ Once transformed the curves overlap perfectly, as expected.
   \showthe\textwidth % Use this to determine the width of the figure.
   \centering
   \includegraphics[]{Figures/analytical_cot.pdf}
-  \caption{\label{fig:analyticalcot}The S-wave phase shift for a square well
+  \caption{\label{fig:analyticalcot}The \(s\)-wave phase shift for a square well
     potential \(V=-4\) MeV, and reduced mass of \(1\) MeV. The \(\pi\)-ambiguity
   in the analytical solution is lifted in the lower panel with the
   transformation \(k\cot{\delta_{0}}\), showing a perfect overlap.}
@@ -29,15 +29,19 @@ in the lower panel. As \(k\to 0\), all curves approach an integral multiple of
 \(\pi\), and decrease towards zero as \(k\to \infty\). As
 Levinson's theorem dictates, the multiple of \(\pi\) corresponds to the number
 of bound states each well can contain, with
-the number of states increasing as the potential depth increases.
+the number of states increasing as the potential deepens.
 
-For some particular well depths, the cross sections shot up beyond the limits of
+For some particular well depths, the cross-sections shoot up beyond the limits of
 the plot. The phase shift curves too have a
-characteristic shape, rising rapidly near \(k=0\). Examples are marked by dashed lines. Such curves indicate that the
-potential is on verge of allowing for an additional bound state. [cont]
+characteristic shape, rising rapidly as they approach \(k=0\). Examples are marked by dashed
+lines. From our expos\'e on resonances in~\cref{sec:resonances}, we recognize these
+as zero energy resonances. Such curves indicate that the
+potential is on the verge of allowing for an additional bound state, producing a
+metastable state with cross-sections approaching the unitarity bound. Indeed, increasing the depth slightly makes the phase shift jump up
+to the next integral value.
 
 A related phenomenon happens where the phase shift crosses \(\delta=\pi\), at
-which point the cross section falls off to zero. This is more
+which point the cross-section falls off to zero. This is more
 clearly demonstrated in~\cref{fig:pizero}. A phase shift of \(n\pi\) means the wave inside
 the well has precisely \(n\) more oscillations than the free wave. When the scattered
 wave exits the potential, it is exactly in phase with the free wave, and hence
@@ -56,24 +60,21 @@ transparent for electrons at a given energy.
   \includegraphics[]{Figures/square_well_wave.pdf}
   \caption{\label{fig:squarewellwave}The phase shift and corresponding cross
     section for several square wells of different depths. All curves fall off to
-    zero due to the potential becoming negligible. As the wells deepen,
+    zero by definition. As the wells deepen,
     the number of possible bound states increases, manifesting as curves
-    starting at multiples of \(\pi\). The dashed lines show the zero energy peaks.}
+    starting at larger multiples of \(\pi\). The dashed lines show the zero energy peaks.}
 \end{figure}
 
 \begin{figure}[hp]
   \centering
   \includegraphics[]{Figures/square_well_wave_pi.pdf}
   \caption{\label{fig:pizero}Examples of phase shift curves crossing \(\delta =
-    \pi\). The scattered wave gets in phase with the free wave, hence equivalent
-    with no scattering. The cross section therefore plummets to zero, as is
-    apparent.}
+    \pi\). The scattered wave gets in phase with the free wave, ending up being equivalent
+    with no scattering. The cross section plummets to zero when this happens.}
 \end{figure}
 
-For completeness sake, the phase shift is found for positive wells, see~\cref{fig:positivesquare}. We expect there to be no bound states, and for
+For check that the method handles repulsive potentials, the phase shift is found for positive wells, see~\cref{fig:positivesquare}. We expect there to be no bound states, and for
 the phase shift to be negative. This is indeed the case, as the figure shows.
-The step-like behavior is due to the [cont. Skip this section? Kinda obvious.
-Well, the step behavior is not, but is also not interesting.].
 
 \begin{figure}[ht!]
   \centering
@@ -93,32 +94,31 @@ Well, the step behavior is not, but is also not interesting.].
 
 \subsubsection{K-Matrix}
 The phase shifts for the \(^{1}S_{0}\) partial wave of \(np\)-scattering
-obtained through the K-matrix method is shown 
+obtained through the K-matrix method are shown 
 in~\cref{fig:kmatrix}. This is compared to experimental data from the Nijmegen
-group\cite{PhysRevC.48.792}, also shown in the same figure. There is generally a
+group, as well as their own pet model \(nijm93\)\cite{PhysRevC.48.792}, also shown in the same figure. There is generally a
 good agreement, with all features of the experimental data being replicated; a
 rapid rise from 0 to \(\approx 60\degree\), followed by a fall and a sign flip
 at \mbox{\(\approx 250\) MeV}. However, the computed phase shift is consistently lower
-than the experimental, until they cross.
+than the experimental, and lower than \(nijm93\) until the lines cross at
+\(300\) MeV.
 
 \begin{figure}[ht!]
   \centering
   \includegraphics[]{Figures/kmatrix.pdf}
   \caption{\label{fig:kmatrix}Phase shift for \(^{1}S_{0}\) partial wave of
-    \(np\)-scattering, both experimental data from\cite{PhysRevC.48.792}
-     (\(nijm93\)) and from K-matrix calculations. There is good agreement, but the
+    \(np\)-scattering found by K-matrix calculations using the Reid potential. The experimental data and \(nijm93\) potential fit to
+    aforementioned data are also shown, taken from\cite{PhysRevC.48.792}
+. There is good agreement, but the
   calculated phase shift is consistently lower than the experimental
   values. 30 mesh points were used in the calculation for each phase shift point.}
 \end{figure}
 
 The accuracy of the K-matrix calculations depends on the number of mesh points
-used. To determine its influence, the Nijmegen data was interpolated with linear
-interpolation, and compared to K-matrix calculations using different mesh sizes.
+used. To determine its influence, different mesh sizes were used to compute the
+phase shift at the same energies at the experimental data, and compared to them.
 The comparison was made by taking the total mean square error (MSE).
-See~\cref{fig:kmatrix_accuracy}. As the shape of the curve remains fairly
-consistent, the MSE of the region \(0\le T_{\text{lab}} \le 150\) MeV was chosen as
-representative of the ``total'' MSE. This is mainly done to avoid the crossing
-which slightly complicates the error comparison.
+See~\cref{fig:kmatrix_accuracy}. 
 
 Unsurprisingly, the MSE starts off jumping before quickly falling off to a
 minimum at about \(25\) mesh points.  As the MSE converges with just a few mesh points, the
@@ -131,20 +131,22 @@ resources.
 \begin{figure}[ht!]
   \centering
   \includegraphics[]{Figures/kmatrix_accuracy}
-  \caption{\label{fig:kmatrix_accuracy}The accuracy of the K-Matrix method as a
-  function of number of mesh points. For \(n>20\), the error remains near
-  constant. 150 phase shifts were calculated for energies \(0\le T_{\text{lab}} \le 150\).}
+  \caption{\label{fig:kmatrix_accuracy}The mean square error of the K-Matrix method as a
+  function of number of mesh points. The computed values were compared to the
+  mean of the experimental values. The For \(n>20\), the error remains near
+  constant.}
 \end{figure}
 
 The total computation time and amount of allocated bytes used by the K-matrix
 method is shown in~\cref{fig:kmatrix_measurements}. As discussed
 in~\cref{sec:discret}, both the time and the memory is expected to increase by roughly
-\(\mathcal{O}(N^{2})\). Fitting second degree polynomials, we see that this is
-indeed roughly the case, with the required time being slightly chaotic. The
+\(\mathcal{O}(N^{2})\), \(N\) being the mesh size. Fitting second degree polynomials, we see that this is
+indeed roughly the case, with the required time being slightly chaotic due to
+the stochastic nature. The
 time was measured by repeating each calculation ten times and taking the median.
 
 There is therefore a trade off between the resources required for a calculation
-and the accuracy obtained, a trade off which quickly gets increasingly poor,
+and the accuracy obtained, a trade off that quickly gets increasingly poor,
 as no further benefit is obtained after \(\approx 25\) mesh points.
 
 \begin{figure}[ht!]
@@ -160,23 +162,26 @@ as no further benefit is obtained after \(\approx 25\) mesh points.
 \subsubsection{VPA}
 
 The second method for obtaining the phase shift from the Reid potential is the
-variable phase approach. The results are compared with the Nijmegen data
+variable phase approach. As before, the results are compared with the Nijmegen results
 in~\cref{fig:vpa}, and not unexpectedly, it gives very similar results
 as~\cref{fig:kmatrix}.
 
 \begin{figure}[ht!]
   \centering
   \includegraphics[]{Figures/vpa.pdf}
-  \caption{\label{fig:vpa}The resulting \(S\)-wave phase shift from variable
-    phase approach alongside experimental data.}
+  \caption{\label{fig:vpa}The resulting \(s\)-wave phase shift from the variable
+    phase approach alongside experimental Nijmegen data.}
 \end{figure}
 
-VPA requires the cut-off of the potential to be sufficiently close to infinity
-to make the error negligible. Cutting off too quickly can be computationally
+VPA requires the cut-off\footnote{I chose the notation \(r_{\text{end}}\) instead of
+  the earlier used $\rho$ to underline that $\rho$ is a dummy variable for
+  theoretical use, while $r_{\text{end}}$ is a deliberate choice for when to
+  stop the integration of the differential equation.} \(r_{\text{end}}\) of the potential to be sufficiently close to infinity
+to make the error negligible. Cutting off at low \(r_{\text{end}}\) can be computationally
 beneficial, so there is one more a trade off between accuracy and resource
 usage. The resulting phase shifts from different cut-off points are shown
 in~\cref{fig:rend}. When the cut-off is too small, the potential is effectively
-a repulsive potential, hence giving a negative phase shift. The phase shift gets
+a repulsive potential, yielding a negative phase shift. The phase shift gets
 increasingly negative as the interaction ``sees'' more of the repulsive region,
 but once the attractive region is included, the phase shift quickly increases
 and converges to the far-away solution (\(r_{\text{end}}=15\)).
@@ -193,20 +198,23 @@ and converges to the far-away solution (\(r_{\text{end}}=15\)).
 The resource usage of VPA is significantly more difficult to measure, as the
 differential equation is solved by the external package
 \textrm{DifferentialEq.jl}, allowing for a range of different parameters and
-methods. For completeness sake, the MSE, time and memory usage as a function of
-the step size is shown in the appendix~\cref{fig:vpa_measurements}. The
+methods. For completeness' sake, the MSE, time and memory usage as a function of
+the step size are shown in the appendix~\cref{fig:vpa_measurements}. The
 interesting information is that the time is nearly constant at \(\approx 0.2\)
 seconds for the same number of phase shift points as the K-matrix method solved
 in~\cref{fig:kmatrix_measurements}. The K-matrix method is therefore
 significantly faster, with no loss in accuracy.
 
 
-\subsubsection{Comparison \& Exploration}
+\subsubsection{Comparison and Exploration}
 
 The phase shift from both K-matrix calculations and VPA are plotted together
-in~\cref{fig:vpa_matrix_compare} alongside the experimental data. The pointwise
-relative error is shown in the lower panel, having a parabolic shape. The
-theoretical points are perfectly overlapping. Since we already know that VPA
+in~\cref{fig:vpa_matrix_compare} alongside the Nijmegen experimental data and
+their potential. The nijm93 potential was interpolated with linear interpolation to match up to the
+experimental data. The pointwise
+relative error is shown in the lower panel. Both curves obtained from the
+K-matrix method and VPA are perfectly overlapping, illustrating that they yield
+equivalent results of computing the phase shift. Since we already know that VPA
 is in agreement with the analytical solutions of the square well, we have
 confidence that the K-matrix method too is correctly implemented.
 
@@ -215,7 +223,8 @@ confidence that the K-matrix method too is correctly implemented.
   \centering
   \includegraphics[]{Figures/vpa_kmatrix_compare.pdf}
   \caption{\label{fig:vpa_matrix_compare}The results of K-matrix and VPA using
-    good parameters, compared to the \(nijm93\) data. The relative error is
+    good parameters (mesh size of 30, \(r_{\text{end}}\) of 15, default
+    diffeq-solver parameters), compared to the \(nijm93\) data. The relative error is
     shown in the lower panel. Only \mbox{\(1 < T_{\mathrm{lab}} < 100\)} MeV are
     included; an arbitrary choice to exclude the jump at \(\approx 0.1 \) MeV
     and the crossing near \(250\) MeV.}
@@ -225,8 +234,21 @@ As the
 discrepancy between the theoretical computations and the experimental data can
 be attributed to neither the parameters of the methods nor the methods
 themselves, the culprit must be the model. The Reid potential was fitted to
-\(np\)-scattering data from the \(60\)s and earlier, while the Nijmegen data is
-more complete and obtained from more accurate methods.
+\(np\)-scattering data from the \(60\)s and earlier. The later work of the
+Nijmegen group, as described in~\cite{PhysRevC.48.792}, used more data obtained
+through more accurate methods.
+
+There are, however, some questions arising when examining the Nijmegen
+results. Their data was collected from a wide variety of sources, several of
+them through private communications. Although they have described their analysis
+in detail, some details are rather lacking, one of them being exactly whence the
+points shown in~\cref{fig:vpa_matrix_compare} originate. They do not seem to be
+experimental data per say, but rather a ``representative sample'' calculated
+from the experimental data. Their own \(nijm93\) potential match these points
+well at lower energies, getting progressively worse as the energy increases. For
+\(T_{\text{lab}}>275\) MeV, the Reid potential yields better results. It is not at
+all clear whether the ``experimental'' data points should be held as the golden
+yardstick which the potentials ought to be compared. 
 
 
 % \begin{figure}[ht!]
@@ -247,7 +269,10 @@ there to be a bound state if the potential was just slightly more
 attractive. To examine this, the second term of the Reid potential was increased
 by a few percent, yielding the phase shift curves of~\cref{fig:changeV2}. At
 \(+3.37\%\) its strength, the phase shift at \(k=0\) jumps up to \(180\degree\),
-allowing for a bound state by Levinson's theorem.
+allowing for a bound state by Levinson's theorem. This is a known experimental
+fact, the \(T=0\) singlet not having any bound state in contrast to the bound state of
+the \(T=1\) triplet, deuterium. It is striking, however, just how close the
+singlet is to obtaining a bound state. 
 
 \begin{figure}[ht!]
   \centering

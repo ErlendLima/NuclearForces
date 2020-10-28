@@ -1,4 +1,5 @@
 \section{Theory}\label{sec:Theory}
+\subsection{The Scattering Operator}
 
 \newcommand{\state}{\ket{\psi}}
 \newcommand{\hoket}{\ket{\phi}}
@@ -15,29 +16,39 @@
 \newcommand{\mscat}{\(\scat\)}
 \newcommand{\oop}[1]{\mathcal{#1}}
 \newcommand{\moop}[1]{\(\oop{#1}\)}
+\renewcommand{\vu}[1]{\mathbf{\hat{\text{$#1$}}}}
 Quantum scattering is a very complicated process, behaving so differently from the
 classical case of billiard balls that our intuition breaks down. Fortunately, the intricacies of
 the scattering process itself can be conveniently omitted by instead focusing on
-the relationship between the initial and resulting states, illustrated in FIGURE.
-Specifically, the true state \(\ket{\psi}\) is related to the asymptotic
-incoming and outgoing states \(\kpin\) and \(\kpout\) through the so-called
-\textit{M\o ller operators} \(\Omega_{\pm}\):
-
-\begin{align*}
-  \state &= \mop\kpin = \hoep\\
-  \state &= \mom\kpout = \hoem .
-\end{align*}
-[Add some history of Møller]
+the relationship between the initial and resulting orbits.
+Specifically, the true orbit \(\ket{\psi}\) is related to the asymptotic
+incoming and outgoing orbits \(\kpin\) and \(\kpout\) through the so-called
+\textit{M\o ller operators} \(\Omega_{\pm}\), defined
+as
+\begin{equation*}
+  \Omega_{\pm} = \lim_{t\to\infty} \oop{U}(t)^{\dagger}\oop{U}^{0}(t)
+\end{equation*}
+where \(\oop{U}^{(0)}(t)=\exp\left[ i\oop{H}^{(0)}t \right]\) are the familiar time evolution
+operators for the full and free Hamiltonians. We can then move between in true
+and asymptotic orbits with
+\renewcommand{\thefootnote}{\alph{footnote}}
+\begin{alignat*}{2}
+  \state &= \mop\kpin  &&= \hoep\\
+  \state &= \mom\kpout &&= \hoem .
+\end{alignat*}
+%[Add some history of Møller]
 
 If time dependence is added, the M\o{}ller operations allows one to move between
-the asymptotic states and the actual state at time \(t\).
-Combining them, the outgoing state is related to the incoming state by
+the asymptotic orbits and the actual orbit at time \(t\).
+Combining them, the outgoing orbit is related to the incoming orbit by
 
 \begin{equation*}
   \kpout = \mom^{\dagger}\mop\kpin = \scat\kpin
 \end{equation*}
 
-giving the definition of the \textit{scattering operator} \mscat.
+giving the definition of the \textit{scattering operator} \mscat. Note that
+since the time evolution operator is unitary, and \mscat{} is a product of time
+evolution operators, \mscat{} is unitary.
 In the general case, let \(\ket{\chi -}\) and \(\ket{\Phi +}\) be any arbitrary
 orbits. The probability of the process \(\ket{\Phi +}\to\ket{\chi -}\)
 occurring is
@@ -47,8 +58,8 @@ then the square of the  matrix element of\ \mscat :
   w(\chi \leftarrow \Phi) = \left| \ip{\chi -}{\Phi +} \right|^{2} = \melt{\chi}{\scat}{\Phi}.
 \end{equation*}
 
-While the probability \(w\) itself is not observable, the related quantity
-cross-section \mbox{\(\sigma(\chi \leftarrow \Phi)\)} is. The outgoing particle can
+The probability \(w\) itself is not observable. Instead, what is measured is the related quantity 
+\textit{cross-section} \mbox{\(\sigma(\chi \leftarrow \Phi)\)}. The outgoing particle can
 scatter into a solid angle \(d\Omega\), oriented in the direction of momentum
 \(\vec{p}\). Likewise, the incoming particle can be described as wave packets
 with narrowly defined momentum \(\vec{p_{0}}\). It can then be
@@ -62,40 +73,44 @@ with \(f(\vec{p}\leftarrow \vec{p_{0}})\) being the scattering amplitude, as kno
 theory. Note that only the magnitude of \(f\) can be obtained through the
 cross-section.
 
-The next step is to relate cross-section to the scattering operator. It
-can be shown\cite[p.~40] that \mscat{} commutes with the free Hamiltonian \( \oop{H}_{0}\)
+The next step is to relate the cross-section to the scattering operator. It
+can be shown\cite[p.~40]{taylor} that \mscat{} commutes with the free Hamiltonian \( \oop{H}^{0}\)
 \begin{align*}
-  \oop{H} = \oop{H}_{0} + V &\qquad [\oop{H}_{0}, \scat{}] = 0
+  \oop{H} = \oop{H}^{0} + V &\qquad [\oop{H}^{0}, \scat{}] = 0
 \end{align*}
-Letting \(\ket{\vb{p}}\) be the eigenvectors of \(\oop{H}_{0}\) in momentum
-basis, we have
+Letting \(\ket{\vb{p}}\) be the eigenvectors of \(\oop{H}^{0}\) in momentum
+basis, we have for the scattering process \(\ket{p}\to\ket{p^{\prime}}\):
 \begin{align*}
-  \mel{\vb{p}^{\prime}}{[\oop{H}_{0}, \scat]}{\vb{p}} = (E_{p^{\prime}}-E_{p})\mel{\vb{p}^{\prime}}{\scat}{\vb{p}} = 0
+  \mel{\vb{p}^{\prime}}{[\oop{H}^{0}, \scat]}{\vb{p}} = (E_{p^{\prime}}-E_{p})\mel{\vb{p}^{\prime}}{\scat}{\vb{p}} = 0
 \end{align*}
 implying that \(\mel{\vb{p}^{\prime}}{\scat}{\vb{p}}\) is zero except for
 \(E_{p^{\prime}}=E_{p}\). This leads to the form
 \begin{align*}
   \mel{\vb{p}^{\prime}}{\scat}{\vb{p}} = \delta(E_{p^{\prime}}-E_{p})\times\text{remainder}
 \end{align*}
+where \(\delta\) is the Dirac delta function.
 
 At this point it is fruitful to define a new operator \(\oop{R} \equiv 1 -
-\scat\). \moop{R} is the difference between the case of scattering and no scattering. It too commutes with \(\oop{H}_{0}\), and so has the form
+\scat\). \moop{R} is the difference between the case of scattering and no scattering. It too commutes with \(\oop{H}^{0}\), and so has the form
 \begin{align*}
   \mel{\vb{p}^{\prime}}{\oop{R}}{\vb{p}} = -2\pi i\delta(E_{p^{\prime}}-E_{p})t(\vb{p}^{\prime}\leftarrow \vb{p})
 \end{align*}
-with the factors \(-2\pi i\) and \(t(\vb{p}^{\prime}\leftarrow\vb{p})\)
-introduced for future convenience. The elements of\ \mscat{} can therefore be written 
+for some unknown function \(t(\vb{p}^{\prime}\leftarrow\vb{p})\) of \(p\) and
+\(p^{\prime}\). The factor \(-2\pi i\) introduced to make future results more readable. The elements of\ \mscat{} can therefore be written 
 \begin{align*}
   \mel{\vb{p}^{\prime}}{\scat}{\vb{p}} = \delta(\vb{p}^{\prime} - \vb{p}) - 2\pi i \delta(E_{p^{\prime}}-E_{p})t(\vb{p}^{\prime}\leftarrow \vb{p}).
 \end{align*}
  The function
 \(t(\vb{p}^{\prime}\leftarrow \vb{p})\) is continuous for most potentials and
-analytic for many, but only defined for the ``shell'' \(\vb{p}^{{\prime}^{2}} =
-\vb{p}^{2}\). However unphysical, it is computationally beneficial to define an
-operator \moop{T} whose matrix elements \(\mel{\vb{p}^{\prime}}{T}{\vb{p}}\) are defined for all \(\vb{p}\) and
-coincide with the values of \(t\) on the shell.
+analytic for many\cite[p.~42]{taylor}, but only defined for the ``shell'' \(\vb{p}^{{\prime}^{2}} =
+\vb{p}^{2}\). However unphysical, it is beneficial to define an
+operator \moop{T} whose matrix elements \(\mel{\vb{p}^{\prime}}{\oop{T}}{\vb{p}}\) are defined for all \(\vb{p}\) and
+coincide with the values of \(t\) on the shell\footnote{Note how there can not
+  exist an operator \moop{\tilde{T}} whose matrix \textit{is} \(t\), as the
+  matrix must be defined \textit{for all} \(p, p^{\prime}\), not just the shell
+  \(p^{2}={p^{\prime}}^{2}\).}. The matrix itself we denote \(T\).
 
-The scattering amplitude can be shown to be related to the on-shell \moop{T}
+The scattering amplitude can be shown to be related to the on-shell \(T\)
 matrix elements as\cite[p.~172]{taylor}
 \begin{align*}
   f(\vb{p}^{\prime} \leftarrow \vb{p})= -(2\pi)^{2}mt(\vb{p}^{\prime}\leftarrow\vb{p}).
@@ -109,16 +124,15 @@ The first term describes the situation where no scattering occurs, while the
 second is the amplitude for when the wave is actually scattered, with the
 probability being the square of the scattering amplitude, hence its name.
 \subsection{Spherical Coordinates}
-
-Introducti
-
+The description of the scattering operators simplifies greatly when exploiting
+the spherical symmetry of many potentials.
 As known from elementary quantum mechanics, \(\oop{H}^{0}\) commutes with the
 angular momentum operator \(\oop{L}^{2}\) and z-axis projection \(\oop{L}_{3}\).
 These three operators form a complete set of commuting observables. As 
 \mscat{} commutes with \(\oop{H}^{0}\), \mscat{} too commutes with the
 aforementioned 
 operators, and is diagonal in the common basis, namely the basis of spherical waves
-\(\left\{ \ket{Elm} \right\}\), with \(E, l(l+1)\) and \(m\) being the
+\(\left\{ \ket{Elm} \right\}\), with \(E,\; l(l+1)\) and \(m\) being the
 eigenvalues for \(\oop{H}^{0}\),  \(\oop{L}^{2}\) and  \(\oop{L}_{3}\)
 respectively. Since this basis diagonalizes\ \mscat{}, its matrix elements in
 this basis are
@@ -138,41 +152,38 @@ purely real with an inherent ambiguity modulo \(\pi\), as seen from
   \exp(2i[\delta_{l}+n\pi]) = \exp(2i\delta_{l})\exp(2in\pi) = \exp(2i\delta_{l}).
 \end{align*}
 
-[Meaning of T in the sense incident plane wave]
-[]
-
 The decomposition of \(f(\vb{p}^{\prime}\leftarrow\vb{p})\) into partial waves
-can be obtained by exploiting the relation
+can be obtained by exploiting the relation (dropping the subscripts for \(E(p)\))
 
 \begin{equation}
   \label{eq:sp1}
   \mel{\vb{p}^{\prime}}{(\scat-1)}{\vb{p}} = \frac{i}{2\pi m}\delta(E^{\prime}-E)f(\vb{p}^{\prime}\leftarrow \vb{p}).
 \end{equation}
-Inserting a complete set of states of the left hand side gives
+Inserting a complete set of states on the left hand side gives
 \begin{align*}
   \mel{\vb{p}^{\prime}}{(\scat-1)}{\vb{p}} &= \int \dd E \sum_{l, m}  \mel{\vb{p}^{\prime}}{(\scat-1)}{Elm}\ip{Elm}{\vb{p}}\\
                                              &=  \int \dd E \sum_{l, m} (s_{l}(E)-1) \ip{\vb{p}^{\prime}}{Elm}\ip{Elm}{\vb{p}}\\
   &= \frac{1}{mp}\delta(E_{p^{\prime}}-E_{p})\sum_{l,m}Y_{l}^{m}(\vu{p}^{\prime})[s_{l}(E_{p})-1]Y^{m}_{l}(\vu{p})^{*}
 \end{align*}
 where \(Y_{l}^{m}\) are the spherical harmonicals and the \(\hat{\text{hat}}\) denotes unit vector. Combining this
-with~\eqref{eq:sp1}, the amplitude can be decomposed to
+with~\eqref{eq:sp1}, the amplitude can be decomposed into
 
 \begin{align*}
   f(\vb{p}^{\prime}\leftarrow\vb{p}) = \frac{2\pi}{ip}\sum_{l,m}Y_{l}^{m}(\vu{p}^{\prime})[s_{l}(E_{p})-1]Y^{m}_{l}(\vu{p})^{*}
 \end{align*}
-Letting \(\vu{p}\) lie along \(z\) and noting independence of \(m\) [WHY], we
+Letting \(\vu{p}\) lie along \(z\) and noting independence of \(m\), we
 define
 \begin{align*}
-  f(E_{p},\theta) \equiv f(\vb{p}^{\prime}\leftarrow\vb{p})=\frac{1}{2ip}\sum_{l}(2l+1)[s_{l}(E_{p})-1]P_{l}(\cos\theta)
+  f(E_{p},\theta) \equiv f(\vb{p}^{\prime}\leftarrow\vb{p})=\frac{1}{2ip}\sum_{l}(2l+1)[s_{l}(E_{p})-1]P_{l}(\cos\theta).
 \end{align*}
 This leads to the natural definition of the \textit{partial wave amplitude} as
 \begin{align*}
-  f_{l}(E) \equiv \frac{s_{l}(E)-1}{2ip} = \frac{\exp[ 2i\delta_{l}(\theta)] - 1}{2ip} = \frac{\exp[2i\delta_{l}(E)]\sin\delta_{l}(E)}{p}
+  f_{l}(E) \equiv \frac{s_{l}(E)-1}{2ip} = \frac{\exp[ 2i\delta_{l}(\theta)] - 1}{2ip} = \frac{\exp[2i\delta_{l}(E)]\sin\delta_{l}(E)}{p}.
 \end{align*}
 Analogously the total cross-section can be decomposed into \textit{partial wave
   cross-sections}, giving
 \begin{align*}
-  \sigma(p) = \sum_{l}\sigma_{l}(p) = \sum_{l}4\pi(2l+1)\left| f_{l}(p) \right|^{2} = \sum_{l}4\pi(2l+1)\frac{\sin^{2}\delta_{l}}{p^{2}}
+  \sigma(p) = \sum_{l}\sigma_{l}(p) = \sum_{l}4\pi(2l+1)\left| f_{l}(p) \right|^{2} = \sum_{l}4\pi(2l+1)\frac{\sin^{2}\delta_{l}}{p^{2}}.
 \end{align*}
 The magnitude of each partial wave cross-section is from this constrained by the
 so called \textit{unitary bound}: 
@@ -180,16 +191,17 @@ so called \textit{unitary bound}:
   |\sigma_{l}| \leq 4\pi\frac{2l+1}{p^{2}}.
 \end{align*}
 The maximal value is only reached if
-\(\delta_{l}\) is an odd multiple of \(\pi/2\)
+\(\delta_{l}\) is an odd multiple of \(\pi/2\).
 
 General properties of the scattering process can be found by studying both the
 general and the limiting forms of the wave function. As before, the wave
 function of the full Hamiltonian
-\(\ip{vb{x}}{Elm+}\) can be obtained from the wave function of the free Hamiltonian by the Møller operator
+\(\ip{\vb{x}}{Elm+}\) can be obtained from the wave function of the free Hamiltonian by the Møller operator
 \begin{equation*}
   \ip{\vb{x}}{Elm+} = \Omega_{+}\ip{\vb{x}}{Elm},
 \end{equation*}
-and hence we can get away with studying the free wave. From basic quantum
+and hence we can get away with studying the free wave and transforming our
+results later. From basic quantum
 mechanics, we know it is on the form
 \(\frac{1}{r}y(r)Y^{m}_{l}(\vu{x})\) with \(y(r)\) satisfying the radial
 Schr\"odinger equation
@@ -198,28 +210,31 @@ Schr\"odinger equation
   \left[ \dv[2]{r} - \frac{l(l+1)}{r^{2}}+p^{2}\right]y(r) = 0.
 \end{equation*}
 \newcommand{\rbf}{\hat{j}_l(z)}
+
 When \(r\to 0\), \(y(r)\) must go as\(r^{-l}\) or \(r^{l+1}\). The latter
 condition is satisfied by the
 Riccati-Bessel functions \(\rbf{} = zj_{l}(z)\). Its limiting behavior as \(z\to
 0\) is
-\begin{equation*}
-  \rbf{} \xlongrightarrow[z\to 0]{} \frac{z^{l+1}}{(2l+1)!!}\left[ 1+\mathcal{O}(z^{2}) \right]
-\end{equation*}
+\begin{equation}
+  \label{eq:rbf}
+  \rbf{} \xlongrightarrow[z\to 0]{} \frac{z^{l+1}}{(2l+1)!!}\left[ 1+\mathcal{O}(z^{2}) \right].
+\end{equation}
 The other limiting condition is satisfied by the Riccati-Neumann function
 \(\hat{n}_{l}(z)\). 
 
-Hence
+The wave function can therefore be written on the form
 \begin{equation}
   \label{eq:xelm}
-  \ip{\vb{x}}{Elm} = i^{l}\left( \frac{2m}{\pi p} \right)^{1/2}\frac{1}{r}\hat{j}^{l}(pr)Y^{m}_{l}(\vu{x})
+  \ip{\vb{x}}{Elm} = i^{l}\left( \frac{2m}{\pi p} \right)^{1/2}\frac{1}{r}\hat{j}^{l}(pr)Y^{m}_{l}(\vu{x}).
 \end{equation}
 
 On the other side, the limit \(r\to\infty\) requires the boundary conditions
 \(e^{\pm ipr}\). These are satisfied by the Riccati-Hankel functions
 \(\hat{h}_{l}^{\pm}(z) = \hat{n}_{l}(z) \pm ij_{l}(z)\). Its limiting form is
-\begin{equation*}
+\begin{equation}
+  \label{eq:hankel}
   \hat{h}^{\pm}_{l}(z) = e^{\pm i\left( z-l\pi/2 \right)}\left[ 1+\mathcal{O}(z^{-1}) \right]
-\end{equation*}
+\end{equation}
 
 In analogy to~\eqref{eq:xelm}, the full wave function can be written as
 \begin{equation*}
@@ -227,13 +242,18 @@ In analogy to~\eqref{eq:xelm}, the full wave function can be written as
 \end{equation*}
 from which we see that \(\psi_{lp}(r)\to\hat{j}_{l}(pr)\) when \(V\to 0\). In
 the other limiting case \(r\to \infty\), it can be shown~\cite[p.~187]{taylor} to be
+\begin{equation}
+  \label{eq:psi}
+  \psi_{lp}(r)   \xlongrightarrow[r\to \infty]{} \frac{i}{2}\left[\hat{h}^{-}_{l}(pr) - s_{l}(p)\hat{h}^{+}_{l}(pr)\right]
+\end{equation}
+or
 \begin{equation*}
   \psi_{lp}(r)   \xlongrightarrow[r\to \infty]{} \hat{j}_{l}(pr)+pf_{l}\hat{h}^{+}_{l}(pr).
 \end{equation*}
-Using the limiting forms of the functions and some algebra, this can be
+Using the limiting forms~\eqref{eq:rbf} and~\eqref{eq:hankel} of the functions and some algebra, this can be
 rewritten as
 \begin{equation*}
-  \psi_{lp}(r)   \xlongrightarrow[r\to \infty]{} e^{i\delta_{l}(p)}\sin\left[ pr - \frac{1}{2}l\pi+\delta_{l}(p) \right]
+  \psi_{lp}(r)   \xlongrightarrow[r\to \infty]{} e^{i\delta_{l}(p)}\sin\left[ pr - \frac{1}{2}l\pi+\delta_{l}(p) \right].
 \end{equation*}
 This makes significance of the phase shift apparent. At large \(r\) the actual
 wave function becomes proportional to the free wave function
@@ -257,9 +277,9 @@ and the \textit{full Green's operator}
 \begin{equation*}
   \oop{G}(z) \equiv (z-\oop{H})^{-1}
 \end{equation*}
-with \(z\in\mathbb{C}\). Without loss of generality, assume the spectrum of
-\(\oop{H}\) is discrete, with the orthonormal basis \({\ket{n}}\). Then the full
-Green's operator can be written
+with \(z\in\mathbb{C}\). The spectrum of
+\(\oop{H}\) is discrete, with the orthonormal basis \({\ket{n}}\). The full
+Green's operator can then be written
 
 \begin{equation*}
   \oop{G}(z) = (z-\oop{H})^{-1}1 = \sum_{n}\frac{\op{n}}{z-E_{n}}.
@@ -270,6 +290,7 @@ A specific matrix element is therefore
 \end{equation*}
 \newcommand{\gop}{\oop{G}(z)}
 \newcommand{\mgop}{\(\oop{G}(z)\)}
+
 For any \(z\) not an eigenvalue \(E_{n}\), the matrix element is well defined and
 analytic. When \(z\) is an eigenvalue, it is a simple pole with residue
 \(\ip{\chi}{n}\ip{n}{\psi}\). That is, knowing the poles of \(\oop{G}(z)\) gives
@@ -277,7 +298,7 @@ information about the corresponding eigenvectors. As both the energy
 eigenvectors and eigenvalues can be found from \mgop{} itself, knowledge of
 \mgop{} is equivalent to solving the eigenvalue problem of
 \(\oop{H}\)\footnote{Of course, this is merely an intuitive explanation, not a
-  proof. It can be shown that this is indeed true in the general case, see~\cite[p.~131]{taylor}}
+  proof. It can be shown that this is indeed true in the general case, see~\cite[p.~131]{taylor}.}
 
 While discrete spectra lead to poles in \(\mel{\chi}{\gop{}}{\psi}\), continuous spectra lead to 
 branch cuts. Consider the free Green's operator, which in terms of the angular
@@ -318,14 +339,15 @@ This is known as the \textit{Lippmann-Schwinger equation for \mgop{}}.
 
 \subsection{Lippman Schwinger}
 
-The Lippmann-Schwinger equation turns out to be a common and useful relation
+The Lippmann-Schwinger (LS) equation turns out to be a common and useful relation
 between operators in scattering theory. The derivation through Green's operators
 is not the historic path, and has the downside of obscuring its physical
-relationship to the Schr\"odinger equation.
+relationship to the Schr\"odinger equation. The benefit is its clear origins
+from a trivial algebraic relation, showing that there is not \textit{the} LS
+equation, but many.
 
-[intro]
-Out of thin air we define the operator \(\oop{T}\) as the potential plus the
-distortion to the potential caused by the full Green's operator:
+The operator \(\oop{T}\) earlier introduced can be written as the potential plus the
+distortion to the potential caused by the full Green's operator\cite[p.~137]{taylor}:
 
 \begin{equation}
   \label{eq:T}
@@ -344,13 +366,13 @@ In momentum space~\eqref{eq:LST} is written as
 
 \begin{equation*}
   \mel{\vb{p}^{\prime}}{\oop{T}(z)}{\vb{p}} = \mel{\vb{p}^{\prime}}{V}{\vb{p}}
-  + \int\dd^{3}p^{''} \frac{\mel{\vb{p}}{V}{\vb{p^{''}}}}{z-E_{p^{''}}}\mel{\vb{p}^{''}}{T(z)}{\vb{p}}
+  + \int\dd^{3}p^{''} \frac{\mel{\vb{p}}{V}{\vb{p^{''}}}}{z-E_{p^{''}}}\mel{\vb{p}^{''}}{\oop{T}(z)}{\vb{p}}
 \end{equation*}
 
 This highlights the need for introducing the \(\oop{T}\) operator in the first
-place. There is no LS equation for the \(\oop{S}\) because it requires the
-operators to be smooth functions, while \(\oop{S}(z)\) is
-highly singular. On the other hand \(\oop{T}\) analytic almost everywhere,
+place. There is no LS equation for the \(\oop{S}\) operator because it requires the
+operators to be smooth functions, but \(\oop{S}(z)\) is
+highly singular. On the other hand, \(\oop{T}\) is analytic almost everywhere,
 allowing it to be expressed in terms of an integral equation. 
 
 Through a long and rather limit-finicky derivation, the \moop{S} operator can be
@@ -358,7 +380,7 @@ derived in terms of the \moop{T} operator when \(z\) approaches the real axis
 from above
 \begin{equation*}
   \mel{\vb{p}\prime}{S}{\vb{p}} = \delta(\vb{p}^{\prime}-\vb{p}) -2\pi i\delta(E_{p^{\prime}}-E_{p})
-  \lim_{\epsilon\downarrow 0}\mel{\vb{p}^{\prime}}{T(E_{p}+i\epsilon)}{\vb{p}}.
+  \lim_{\epsilon\downarrow 0}\mel{\vb{p}^{\prime}}{\oop{T}(E_{p}+i\epsilon)}{\vb{p}}.
 \end{equation*}
 This relation being the main motivation for defining \moop{T} in the first
 place. It shows that \(t(\vb{p}^{\prime}\leftarrow\vb{p})\) corresponds to the
@@ -366,10 +388,10 @@ on-shell \(T\)-matrix.
 
 A reasonable question to ask is why computing the entire \(T\)-matrix is
 necessary when only the on-shell elements are physical. As already mentioned,
-one reason is computational; The on-shell elements are the limiting quantities
+one reason is computational. The on-shell elements are the limiting quantities
 of the off-shell elements. This doesn't mean that the off-shell elements are
 only a mathematical necessity. In fact, they correspond to the virtual
-interactions in the scattering process, which accounts for their fundamental
+interactions of the scattering process, which accounts for their fundamental
 unmeasurable nature. We are only allowed to observe the scattering in the
 non-interacting region, being the limiting case of the unobservable processes
 happening inside of the interacting region. Our initial starting point of
@@ -378,11 +400,14 @@ scattering is therefore not some mathematical trick to make computation easier,
 but an unavoidable requirement.
 
 \subsection{The K-Matrix}
+    
 
 The Lippmann-Schwinger equation for \(\oop{T}\) can not be solved by simple
 analytical methods. One recourse is to use approximation techniques. These are
 based on the expansion of \(\oop{T}\) into the 
-infinite sum
+infinite sum\footnote{A lot of this section is based
+  on~\cite{reactance} - a chapter from a book I've not been able to identify. It
+provides insights not stated as clearly elsewhere.}
 \begin{equation*}
   \oop{T} = V + V \frac{1}{E-H^{0}+i\epsilon}V + V \frac{1}{E-H^{0}+i\epsilon}V \frac{1}{E-H^{0}+i\epsilon} V+\ldots
 \end{equation*}
@@ -407,20 +432,20 @@ The \(K\)-matrix\footnote{The nomenclature of the \(K\)-matrix is a mess. It is
   matrix, and Heitler's
   matrix. To avoid overworking any of the other
   letters, I follow the style of Taylor.} is the matrix elements of the\
-\moop{M} operator:
+\moop{K} operator:
 \begin{equation*}
   \mel{\vb{p}^{\prime}}{\oop{K}}{\vb{p}} = \delta(E_{p^{\prime}}-E_{p})k(\vb{p}^{\prime}\leftarrow\vb{p}).
 \end{equation*}
 
 The advantage of \(\oop{K}\) is that as long as it is Hermitian, \(\oop{S}\),
 and by consequence \(\oop{T}\), is guaranteed to be unitary. This property also
-holds for any Hermitian \(\tilde{\oop{K}}\) that is not the true \(\oop{K}\) of a
+holds for any Hermitian \(\tilde{\oop{K}}\) that is not the true \(\oop{K}\) of the
 scattering problem, for example due to numerical errors\cite{laszlo,reactance}.
 
 
 From our definition of \(\oop{R}=\oop{S}-1\), the follows readily that
 \begin{equation*}
-  \oop{R} = 2i\oop{K} + iM\oop{R}.
+  \oop{R} = 2i\oop{K} + i\oop{K}\oop{R}.
 \end{equation*}
 By taking the matrix elements we obtain the \textit{Heitler's damping equation}
 \begin{equation*}
@@ -455,7 +480,7 @@ a central and spherically symmetric potential is\cite{morten}
   \mel{p^{\prime}}{K}{p} = \mel{p^{\prime}}{V}{p} + \frac{2}{\pi}\int_{0}^{\infty}dp^{\dprime}\:
   \mel{p^{\prime}}{V}{p^{\dprime}}\frac{1}{E-p^{\dprime}/m} \mel{p^{\dprime}}{K}{p} .
 \end{equation}
-\usetagform{default}
+
 This equation provides a numerically stable method to find the matrix \(K\).
 
 When\ \moop{S} is symmetric,\ \moop{K} is both Hermitian and
@@ -469,10 +494,11 @@ As with\ \moop{S} and\ \moop{R}, \moop{K} becomes diagonal in the basis
 \end{align*}
 The elements \(k_{l}(E)\) will in this case be real, and are directly related to
 the phase shifts:
-\begin{align*}
+\begin{equation}
+  \label{eq:tank}
   k_{l} = i \frac{1-s_{l}}{1+s_{l}} = -\frac{1}{p}\tan\delta_{l}.
-  \tag*{$*$}
-\end{align*}
+\end{equation}
+\usetagform{default}
 
 That is, finding \(K\) by solving~\eqref{eq:LSK} lets us directly obtain the phase shift from the
 diagonal elements of \(K\), and will be one of our two methods to compute the
@@ -492,18 +518,21 @@ standing waves.
 An alternative way to compute the phase shift is through the variable phase
 approach (VPA).
 To develop it, it is useful to introduce another partial wave function
-\(\phi_{lp}(r)\) that differs from \(\psi_{lp}(r)\) only in its normalization.
-It is defined as the solution to the radial Schr\"odinger equation that behaves
-exactly as \(\hat{j}_{l}\) as \(r\to 0\),
+\(\phi_{lp}(r)\) that differs from \(\psi_{lp}(r)\) only in its normalization. 
+The VPA method is based on approximating the regular solution of a potential by
+the regular solution of a truncated potential. A differential equation is the
+result, the limit of which approaches the phase shift.
+
+The regular solution is defined as the solution to the radial Schr\"odinger equation that behaves
+exactly as \(\hat{j}_{l}\) as \(r\to 0\):
 \begin{equation*}
-  \psi_{lp}(r) \xrightarrow[r\to 0]{} \hat{j}_{l}(pr)
+  \psi_{lp}(r) \xrightarrow[r\to 0]{} \hat{j}_{l}(pr).
 \end{equation*}
 Since both the boundary condition and the radial equation are real,
-\(\psi_{lp}(r)\) is always real, hence its name \textit{the regular solution}.
-
-The VPA method is based on approximating the regular solution of a potential by
-the regular solution to a truncated potential. As such, different equations are
-necessary for different \(l\), so we will only look at \(s\)-waves. Define the
+\(\psi_{lp}(r)\) is always real, hence the \textit{regular} in its name.
+As different \(l\) yields
+different \(\hat{j}_{l}(pr)\), different equations must be developed. We are
+only concerned with \(s\)-waves, and leave out the \(l\)-subscript. Define the
 truncated potential \(V_{\rho}(r)\) by
 
 \begin{equation*}
@@ -514,8 +543,8 @@ truncated potential \(V_{\rho}(r)\) by
   \end{cases}
 \end{equation*}
 
-The regular solution to the full potential is \(\psi(r)\), while for the
-truncated potential it is \(\psi_{\rho}(r)\). Likewise, the true phase shift is
+The regular solution to the full potential is \(\phi(r)\), while for the
+truncated potential it is \(\phi_{\rho}(r)\). Likewise, the true phase shift is
 \(\delta\), and the phase shift for the truncated potential is \(\delta(\rho)\).
 The inherent modulo \(\pi\) ambiguity in \(\delta(\rho)\) is removed by defining
 \(\delta(0)=0\). As \(\rho\) increases, it is clear that the truncated potential
@@ -527,7 +556,7 @@ For \(r\le \rho\), both regular solutions coincide\footnote{Note the need for
   the \textit{regular} solutions. The normalized solutions \(\psi_{lp}(r)\) have
   different normalizations for different \(\rho\), resulting in different values at \(r\) for different truncations.}:
 \begin{equation*}
-  \psi(r) = \psi_{\rho}(r) \qquad r \le \rho.
+  \phi(r) = \phi_{\rho}(r) \qquad r \le \rho.
 \end{equation*}
 
 The truncated regular solution is given by
@@ -539,19 +568,19 @@ coincide for \(r=\rho\), we have
 \begin{equation*}
   \phi(\rho) =  \alpha(\rho)\sin\left[p\rho+\delta(\rho)\right].
 \end{equation*}
-This too holds for the derivative at that point, so
+By same reasoning, the derivatives agree at the same point:
 \begin{equation*}
-  \phi^{\prime}(\rho) =  p\alpha(\rho)\cos\left[p\rho+\delta(\rho)\right].
+  \dot{\phi}(\rho) =  p\alpha(\rho)\cos\left[p\rho+\delta(\rho)\right].
 \end{equation*}
-The choice of \(\rho\) is arbitrary, therefore the two relations hold for any
-\(\rho\) and the variable can be substituted with \(r\). Inserting them into the
+The choice of \(\rho\) being arbitrary, the two relations hold for any
+\(\rho\), and the variable can be substituted with \(r\). Inserting them into the
 radial Schr\"odinger equation results in the VPA differential equation for \(s\)-waves:
 \begin{equation}
   \label{eq:vpa}
-  \delta^{\prime}(r) = -\frac{2m}{p}V(r)\sin^{2}[pr+\delta(r)].
+  \dot\delta(r) = -\frac{2m}{p}V(r)\sin^{2}[pr+\delta(r)].
 \end{equation}
 
-Not only does the differential equation give a mean to calculate the phase
+Not only does the differential equation give the means to calculate the phase
 shift, it also gives some theoretical insights. The derivative of the phase
 shift is the potential \(V\) times some negative quantity
 \(-\frac{2m}{p}\sin^{2}(\cdots)\). If the potential is purely negative, the
@@ -561,13 +590,15 @@ positive phase shift, and a positive potential yields a negative phase shift.
 
 \subsection{Levinson's Theorem}
 
-The regular solutions \(\psi_{l,p}(r)\) have already proved themselves as a
+The regular solutions \(\psi_{lp}(r)\) have already proved themselves as a
 useful tool in obtaining the phase shift numerically. It is however a gift that
 keeps on giving, and will now be used to derive\footnote{I say ``derive''. What
   follows is more of a proof sketch than a rigorous treatment, but will
   hopefully provide the intuition for the truth of the theorem.} Levinson's
 theorem, stating that the phase shift in the limit \(p\to 0\) equals the number
 of bound states \(n_{l}\) times \(\pi\).
+
+
 
 \newcommand{\js}{\mathscr{J}}
 As \(r\to \infty\), the regular solution must become proportional to the free
@@ -592,14 +623,14 @@ and
 The coefficient function \(\js_{l}(p)\) is hence the ratio of the two
 solutions. It proves to be a very important function, and is called the
 \textit{Jost function}. It has an intimate relationship with the scattering
-matrix, having the same phase with opposite sign as \(s_{l}\)
+matrix, having the same phase sign as \(s_{l}\) but opposite sign:
 \begin{equation*}
   \js_{l}(p) = |\js_{l}(p)|\exp{-i\delta_{l}(p)}.
 \end{equation*}
 
 The Jost function is a function of the momentum, and to study its behavior, it
 is necessary to expand the momentum to become a complex variable. Although only
-real momenta are physical, using the beauty of the complex plane we can retrieve
+real momenta are physical, the beauty of the complex plane opens up for 
 physical insights.
 
 \newcommand{\imag}{\mathfrak{Im}}
@@ -611,7 +642,7 @@ poles in the upper and lower parts of the complex plane turn out to behave very 
 describing respectively bound states and resonances.
 
 Restricting ourselves to
-the upper half plane, we can show that the poles of \(s_{l}\) correspond to
+the upper half plane, we can show that the poles of \(s_{l}\) indeed correspond to
 bound states. For most potentials the relation \(\js_{l}(p)^{*}=\js_{l}(-p)\) holds. If the Jost
 function vanishes for all \(p\ge \bar{p}\), then we see from~\eqref{eq:jost} that
 the regular solution will be an exponentially decreasing function above
@@ -619,31 +650,63 @@ the regular solution will be an exponentially decreasing function above
 \begin{equation*}
   \phi_{l\bar{p}}\xrightarrow[r\to\infty]{}-\frac{i}{2}\js_{l}(p)^{*}\hat{h}^{+}_{l}(pr).
 \end{equation*}
-As \(\phi_{l\bar{p}}(r)\) vanishes at \(r=0\) by definition, it follows that it is in
+As \(\phi_{l\bar{p}}(r)\) vanishes at \(r=0\) by definition, it is in
 fact normalizable and hence a solution to the radial Schr\"odinger equation with
 energy \(\frac{\bar{p}}{2m}\). The eigenvalues
 of the Hamiltonian are real,  meaning \(\bar{p}\) must be imaginary,
 \(\bar{p}=i\alpha\). The point \(\bar{p}\) is therefore a bound state with
 energy \(\frac{-\alpha}{2m}\). The converse is also true\cite[p.~224]{taylor}.
-As \(s_{l}(p)=\frac{\js_{l}(p)^{*}}{\js_{l}(p)}\), it follows that the when
-\(\js_{l}(\bar{p})=0\), \(s_{l}(\bar{p})\) be a pole corresponding to a bound
-state. The pole is simple with residue \(1\).
+As \(s_{l}(p)=\js_{l}(p)^{*}/\js_{l}(p)\), it follows that the when
+\(\js_{l}(\bar{p})=0\), \(s_{l}(\bar{p})\) is a simple pole
+having residue \(1\).
 
-Levinson's theorem now follows by a simple integration. Consider the
+
+\tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+  % default radius will be 1pt. 
+  cross/.default={1pt}}
+
+\tikzset{>=latex}
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    %\draw (0.0, 0.0) grid (5.5, 4.5);
+    \draw[<->, opacity=0.5] (-5, 0) -- (5, 0);
+    \draw[<->, opacity=0.5] (0, -2) -- (0, 5);
+    \draw (0, 1) node[cross=5pt] {};
+    \draw (0, 2) node[cross=5pt] {};
+    \draw (0, 3) node[cross=5pt] {};
+    \draw[thick] (4, 0) arc(0:180:4);
+    \draw[thick] (0.5, 0) arc(0:180:0.5);
+    \draw[thick] (-4,0) -- (-0.5,0);
+    \draw[thick] (0.5,0) -- (4,0);
+    \draw (0.7, 0.5) node {\(\Gamma_{\varepsilon}\)};
+    \draw (3.3, 3.2) node {\(\Gamma\)};
+    \draw (1.5, 2) node {Bound states};
+    \draw (4.8, -0.3) node {\(\mathfrak{Re}\)};
+    \draw (-0.4, 4.8) node {\(\imag\)};
+  \end{tikzpicture}
+  \caption{The contour of integration. All of the poles of the integrand are
+    contained within the contour. The radius of the larger semicircle is taken
+    to infinity while the radius of the smaller is shrunk to zero. The crosses
+    denote the simple poles, physically representing bound states.}
+  \label{fig:integration}
+\end{figure}
+Levinson's theorem now follows from a simple integration. Consider the
 contour integral
 \begin{equation*}
   I = \oint_{\Gamma} \dd p \frac{\dot{\js}_{l}(p)}{\js_{l}(p)} = \oint_{\Gamma} \dd p \ln\js_{l}(p)
 \end{equation*}
-where the contour \(\Gamma\) is a semitorus in the upper half plane. The
+where the contour \(\Gamma\) is half an annulus in the upper half plane. See~\cref{fig:integration}. The
 integrand is analytic except at the \(n_{l}\) zeros of the Jost function, whence it has
-residue \(1\). By Cauchy's theorem,
+residue \(1\). By Cauchy's theorem
 \begin{equation*}
-  I = 2\pi i n_{l}
+  I = 2\pi i n_{l}.
 \end{equation*}
-When the radius of the larger semicircle is larger than \(\bar{p}\), its
-contribution is zero. Taking the limit as the radius goes to infinity, only the
-path along the real axis plus the smaller semicircle near \(0\) contributes. On
-the positive real axis \(\js_{l}(p) = |\js_{l}(p)|\exp -i\delta_{l}(p)\), so
+When the radius of the larger semicircle is sufficiently large it will contain
+all of the finite poles, at which point on it has zero contribution. Letting the
+radius go to infinity, only the
+path along the real axis plus the smaller semicircle near \(0\) will contribute. On
+the positive real axis \(\js_{l}(p) = |\js_{l}(p)|\exp{-i\delta_{l}(p)}\), so
 
 \begin{equation*}
   \ln\js_{l}(p) = \ln|\js_{l}| - i\delta_{l}(p),
@@ -652,16 +715,16 @@ while on the negative real axis it is
 \begin{equation*}
   \ln\js_{l}(-p) = \ln|\js_{l}| + i\delta_{l}(p).
 \end{equation*}
-Hence the integral evaluates to\footnote{Strictly the contour path consists of the
+The integral therefore evaluates to\footnote{Strictly the contour path consists of the
   three pieces: \((-\infty, \epsilon)\), \(\Gamma_{\varepsilon}\) and
   \((\varepsilon, \infty)\) along with appropriate limits. Consider this abuse
   of notation.}
 \begin{align*}
-  I &= \oint_{-\infty}^{\infty} \dd p \ln\js_{l}(p) + \oint_{\Gamma_{\varepsilon}}\dd p \ln\js_{l}(p)\\
-  &= 2i[\delta_{l}(0)-\delta(\infty)] + \oint_{\Gamma_{\varepsilon}}\dd p \ln\js_{l}(p)\\
+  I &= \int_{-\infty}^{\infty} \dd p \ln\js_{l}(p) + \oint_{\Gamma_{\varepsilon}}\dd p \ln\js_{l}(p)\\
+  &= 2i[\delta_{l}(0)-\delta_{l}(\infty)] + \oint_{\Gamma_{\varepsilon}}\dd p \ln\js_{l}(p)\\
 \end{align*}
-The small semicircle is slightly tricky due to the Jost functions behavior near
-\(0\). With some rigorous treatment is can be coaxed into\cite[p.~234]{taylor}
+The small semicircle is a bit tricky to compute due to the Jost function's behavior near
+zero. With some rigorous treatment is can be coaxed into\cite[p.~234]{taylor}
 \begin{equation*}
   \oint_{\Gamma_{\varepsilon}}\dd p \ln\js_{l}(p) =
   \begin{cases}
@@ -670,7 +733,7 @@ The small semicircle is slightly tricky due to the Jost functions behavior near
   \end{cases}
 \end{equation*}
 
-Defining \(\delta_{l}(\infty)=0\) as before, in the end we have for \(l=0\)
+Defining \(\delta_{l}(\infty)=0\) as before, we have for \(l=0\)
 \begin{equation*}
   \delta_{l}(0)= (n_{0}+1/2)\pi,
 \end{equation*}
@@ -680,10 +743,63 @@ and for \(l>0\)
 \end{equation*}
 proving Levinson's theorem.
 
+\subsection{Resonances}
+\label{sec:resonances}
+
+Without delving into the fascinating subject of resonances, a quick word is in
+order to explain a phenomenon observed later. If \(s_{l}(p)\) has a pole \(\bar{p}\) in the
+lower half plane, and this pole is close to the real axis, then the phase shift
+can by approximated by the sum of a slowly changing component
+\(\delta_{\text{bg}}\) and a rapidly changing component \(\delta_{\text{res}}\):
+\begin{equation*}
+  \delta_{l}(p) = \delta_{\text{bg}}(p) + \delta_{\text{res}}(p).
+\end{equation*}
+Such a point \(\bar{p}\) causes a \textit{resonance}.
+As \(p\in\mathbb{R}\) moves from smaller to greater than the real part of
+\(\bar{p}\), the component \(\delta_{\text{res}}\) goes from \(0\) to \(\pi\),
+causing an almost discontinuous jump in the phase shift. This manifests as a
+peak in the cross-section.
+
+\begin{figure}[ht!]
+  \centering
+  \begin{tikzpicture}
+    %\draw (0.0, 0.0) grid (5.5, 4.5);
+    \draw[<->, opacity=0.5] (-5, 0) -- (5, 0);
+    \draw[<->, opacity=0.5] (0, -5) -- (0, 5);
+    \draw (0, 3.5) node[cross=5pt] {};
+    \draw[->, thick] (0, 3.5) -- (0,0);
+    \draw[->, thick] (0, 0) -- (0,-3.5);
+    \draw[fill, fill opacity=0.2] (0, -4) circle (5pt) ;
+    \draw (1.5, 2) node {Bound states};
+    \draw (1.5, -2) node {Virtual states};
+    \draw (4.8, -0.3) node {\(\mathfrak{Re}\)};
+    \draw (-0.4, 4.8) node {\(\imag\)};
+    \draw[<-] (0, 0) [out=150, in=-90] to (-3, 2) node[above] {Zero-energy resonance};
+    \draw[->] (0, 0) [dashed, thick, out=-90, in=180] to (3,-1) node[right,circle, fill, fill opacity=0.2] (5pt){};
+    \draw[->] (0, 0) [dashed, thick, out=-90, in=0] to (-3,-1) node[left,circle, fill, fill opacity=0.2] (5pt){};
+  \end{tikzpicture}
+  \caption{The path of poles of \(s_{l}(p)\) as a potential gets shallower. For
+    \(s\)-waves the poles can only move along the imaginary axis, while higher
+    waves can move along the entire lower plane (dashed arrows). The closer the
+    poles are to the real axis, the greater the resonance. As the poles leave
+    the imaginary axis, they split into \(n\) poles, where \(n\) is their residue.}
+  \label{fig:resonance}
+\end{figure}
+Resonances and bound states are closely related. If we increase the strength of
+the potential, the poles along the positive imaginary axis move up. If we decrease
+the strength, the poles move down. As the strength is further decreased, the poles
+eventually cross the origin and move along the imaginary axis. At this point the
+poles become resonances. An illustration is shown in~\cref{fig:resonance}. For \(l>0\), the poles can move along the
+entire lower plane, giving birth to other resonances for \(p>0\). For \(l=0\) the pole can only move along the
+imaginary axis, becoming more and more distant from the real axis,
+giving a weaker and weaker resonance. These are also called \textit{virtual
+  states} or \textit{zero energy resonances}. Physically they represent 
+metastable states, giving rise to a retarded scattered wave\cite[p.~246]{taylor}.
+
 \subsection{Potentials}
 \subsubsection{The Square Well}
-Near and dear to everyone is the square well potential; a simple discontinuous
-potential with value \(V\_{0}\) in the interacting region and zero everywhere
+Near and dear to everyone's heart is the square well potential; a simple discontinuous
+potential with value \(V_{0}\) in the interacting region and zero everywhere
 else:
 \begin{equation*}
   V(r) =
@@ -702,14 +818,37 @@ The potential is plotted in~\cref{fig:squarewell}
     \(V_{0}=-1\) MeV.}
 \end{figure}
 
-[Analytical Solutions]
+The analytic form of the phase shift for \(s\)-wave is\cite{morten}
+\begin{equation*}
+  \delta_{0}(E) = \arctan\sqrt{\frac{E}{E+V}} \cdot \tan\left( r\sqrt{2m(E+V)} \right) - r\sqrt{2mE}.
+\end{equation*}
+The disadvantage of this form is discontinuous jumps due to the phase shift's
+modulo \(\pi\) ambiguity. These can be smoothed out by
+\begin{equation*}
+  \delta_{0}(E) \equiv \atan\tan\delta_{0}(E)
+\end{equation*}
 
 
 \subsubsection{The Yukawa Potential}
-[HISTORY]
+In the 1930s there were several attempts at describing the nuclear force.
+Heisenberg considered the neutron to be composite of a proton and electron,
+an idea expanded on by Fermi into \(\beta\)-decay. Unable to explain the
+attractive forces holding the nucleus together, Yukawa modified their idea to
+let the mediating particle not be an electron or neutrino, but an yet unknown
+meson\cite{yukawa}. His prediction was proved right in 1947 with the discovery
+of the pion, yielding him the Nobel prize.
+
+The potential Yukawa suggested was on the form
+\begin{equation*}
+  V(r) = -g^{2}\frac{e^{-\lambda r}}{r}
+\end{equation*}
+with a coupling constant \(g^{2}\) related to the mass of the mediating boson.
+As it is entirely negative, it fails to account for the close range repulsive
+behavior observed in the nuclear force.
+
 
 The Yukawa potential was later generalized into a class of \textit{generalized
-  Yukawa potentials}. They are potentials build on superpositions of Yukawa potentials:
+  Yukawa potentials}, potentials build on superpositions of Yukawa potentials:
 \begin{equation*}
   V(r) = \sum_{i=1}^{N}C_{i}\frac{e^{-\eta_{i}r}}{r}
 \end{equation*}
@@ -729,10 +868,9 @@ where \(x=\mu r\), \(\mu=0.7\) MeV, \(V_{a}=-10.463\) MeV, \(V_{b}=-1650.6\)
 MeV, \(V_{c}=6484.3\) MeV, and \(a=1\), \(b=4\) and \(c=7\).
 
 The individual terms are plotted in~\cref{fig:reid} along with their sum. Its
-construction becomes apparent, where the three terms interact to form its three
-main features: it is a short range potential, quickly falling off to zero with a
-range , with
-an attractive region followed by a strongly repulsive region.
+construction becomes apparent, where the three terms interact to form a strongly
+repulsive potential at close range along with an attractive well at a distance
+of about \(1\) fermi.
 
 \begin{figure}[ht]
   \centering
@@ -742,19 +880,19 @@ an attractive region followed by a strongly repulsive region.
   a short range attractive potential followed by a repulsive core.}
 \end{figure}
 
-The Reid potential for \(np\) \(^{1}S_{0}\) was fit to two thousand data points
-for the phase shift in the region \(0-350\) MeV, and thus should provide a good
-fit in this region.
+The Reid potential for \(np\) \(^{1}S_{0}\) was fit to several hundred data points
+of the phase shift in the region \(0-350\) MeV, and thus should provide a good
+fit in this region\cite{reid}.
 
 \subsubsection{Momentum Basis}
 
-Going from position basis to momentum space requires a change of basis, achieved
+Going from position to momentum space requires a change of basis, achieved
 through a Fourier transform. The problem is multidimensional, requiring a
 generalized Fourier transform. As we are only dealing with spherically symmetric
-and central potentials, the more suitable Hankel transform\footnote{The Hankel
-  transform can be regarded as the Fourier transform in hyperspherical coordinates, expanding the function in
-Bessel functions instead of sines and cosines. } can be used. For
-\(s\)-waves, it takes the form:
+ and central potentials, the more suitable Hankel transform\footnote{The Hankel
+   transform can be regarded as the Fourier transform in hyperspherical coordinates, expanding the function in
+ Bessel functions instead of sines and cosines. } can be used. For
+ \(s\)-waves, it takes the form
 
 \newcommand{\kp}{k^{\prime}}
 \begin{align*}

@@ -34,7 +34,8 @@
 
 %---- fonts and typography ------
 %\usepackage{lmodern}           % Latin Modern
-\usepackage{kpfonts}
+%\usepackage{kpfonts}
+%\usepackage{palatino}
 %\usepackage[nott]{inconsolata}
 \setmonofont{JuliaMono}
 \usepackage[final]{microtype}  % Improved typography
@@ -55,14 +56,14 @@
 % \newunicodechar{π}{\makebox[\fontcharwd\font`a]{$\pi$}}
 %------ header and foot --------
 \usepackage{fancyhdr}
-
 %------ sections layout --------
 \usepackage{sectsty}
-\sectionfont{\fontsize{12}{15}\selectfont}
-\subsectionfont{\fontsize{10}{15}\selectfont}
-\sectionfont{\centering \color{black}} %centering and color
-\subsectionfont{\color{black}}  % sets color of subsections
-\subsubsectionfont{\color{black}}
+\allsectionsfont{\rmfamily}
+\sectionfont{\centering\rmfamily\selectfont}
+\subsectionfont{\rmfamily\selectfont}
+%\sectionfont{\centering \color{black}} %centering and color
+%\subsectionfont{\color{black}}  % sets color of subsections
+%\subsubsectionfont{\color{black}}
 \usepackage{placeins}
 %--------- physics ----------------------
 \usepackage{simpler-wick}
@@ -82,7 +83,7 @@
 \pagestyle{empty}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usetikzlibrary{decorations.markings,decorations.pathreplacing,calc}
+\usetikzlibrary{decorations.markings,decorations.pathreplacing,calc,shapes.misc}
 
 %---------- math environment --------------
 \usepackage{mathtools}  % also loads amsmath
@@ -195,4 +196,13 @@
     hyperref
 ]{biblatex}
 
+
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
 %-------------------- end style ---------------------------
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% TeX-engine: xetex
+%%% End:

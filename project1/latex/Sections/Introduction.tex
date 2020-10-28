@@ -1,19 +1,39 @@
 \section{Introduction}
-The interactions between nucleons is [fullfør]
-In contrast to the electromagnetic force, there is no fundamental theory of the
-strong force. As the quarks and gluons dance together within nuclei, their
+The interactions between nucleons are extremely complex and not yet fully
+understood. As the quarks and gluons dance together within nuclei, their
 strong interaction leaks out as the residual nuclear force, binding the nucleons
-together. As such, the nucleon-nucleon interaction must be described by
+together.  In contrast to the electromagnetic force, the quantum field theory of the
+strong force does not allow itself for practical computation of the resulting
+nuclear force. As such, the nucleon-nucleon interaction must be described by
 approximations and phenomenological models.
 
 The phase shift is a useful proxy for understanding nucleon-nucleon interaction,
 acting as a bridge between empirically obtained cross sections and theoretical
 models.
 Among these theoretical tools to compute the phase section are the \textit{K-matrix theory} and the \textit{variable
-  phase approach} (VPA). Both of these are herein investigated by applying them
-to a two-nucleon system, implemented in the~\href{Julia language}{https://julialang.org/}.
+  phase approach}. Both of these are herein investigated by applying them
+to a proton-neutron system as well as the square well.
+
+The methods are derived through the
+presentation of basic scattering theory. The scattering operator \(\mathcal{S}\) and
+its relationship to the phase shift are introduced before moving on to informally
+deriving the Lippmann-Schwinger equations yielding the equation for the
+\(K\)-matrix. The regular solutions are then presented and used
+to derive the variable phase approach, Levinson's theorem, and explain several aspects of the phase shift.
+
+The theory is written to be self-contained, with emphasis on the intuition
+instead of rigor. It mostly follows the excellent book of Taylor\cite{taylor},
+but draws from multiple references. The numerical methods are implemented in
+the~\href{https://julialang.org/}{Julia language}. All implementations as well
+as examples of their usage are available at~\url{https://github.com/ErlendLima/NuclearForces}.
 
 % When two nucleons interact, they may either enter a bound state or scatter.
 % Though both of them are described by the Schr\"{o}dinger equation, scattering
 % states are more conveniently described by the \textit{Lippmann-Schwinger
 %   equation}. 
+
+%%%   Local Variables:
+%%%   mode: latex
+%%%   TeX-master: "../main"
+%%%   TeX-engine: xetex
+%%%   End:
