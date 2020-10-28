@@ -32,11 +32,11 @@ or equivalent command for SSH.
 Once cloned, the `Scattering` directory needs to be added to Julia's path. 
 For Linux, the directory needs to be linked to `$HOME/.julia/dev`:
 ```shell
-ln -s <path to Scattering> $HOME/.julia/dev/
+ln -s <PATH TO SCATTERING> $HOME/.julia/dev/
 ```
 e.g.
 ```shell
-ln -s ~/gits/NuclearForces/Scattering/ $HOME/.julia/dev/
+ln -s ~/gits/Scattering/ $HOME/.julia/dev/
 ```
 Finally the package must be added. Go to the `$HOME/.julia/dev/`, open Julia with the `julia` command, 
 type `]` to enter package mode, and add the package with `add .Scattering`. E.g.
