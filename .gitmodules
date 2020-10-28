@@ -1,0 +1,3 @@
+[submodule "Scattering"]
+	path = Scattering
+	url = https://github.com/ErlendLima/Scattering.git
