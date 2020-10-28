@@ -7,19 +7,28 @@ compute the phase shift of the Reid potential and comparing it to data of the Ni
 theory to improve on the potential. Both consist of a Jupyter notebook for reproducing all results, and a `latex` directory  
 containing the textual analysis.
 
-The projects share the common Julia code, available [here](/src/). 
+The projects share the common Julia code, available [here](https://github.com/ErlendLima/Scattering).
+
+## Cloning this repository
+To clone this repository, use
+
+```shell
+git clone https://github.com/ErlendLima/NuclearForces.git
+```
+or equivalent command if using SSH. 
 
 ## Installing the Scattering Package
 
-The Julia package exists as a Git submodule. To use it, clone this repository with
+Due to how Julia packages and Git interact, the Julia code is separated out into another package.
+The package is available [here](https://github.com/ErlendLima/Scattering). For completeness' sake, its
+installation instructions are repeated here.
 
+Clone the package with
 ```shell
-git clone --recurse-submodules git@github.com:ErlendLima/NuclearForces.git
+git clone https://github.com/ErlendLima/Scattering.git
 ```
-If you have an older git version than 2.8, try
-```shell
-git clone --recursive  git@github.com:ErlendLima/NuclearForces.git
-```
+or equivalent command for SSH.
+
 Once cloned, the `Scattering` directory needs to be added to Julia's path. 
 For Linux, the directory needs to be linked to `$HOME/.julia/dev`:
 ```shell
