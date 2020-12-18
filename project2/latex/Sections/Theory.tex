@@ -1,0 +1,128 @@
+\section{Theory}\label{sec:Theory}
+
+\newcommand{\state}{\ket{\psi}}
+\newcommand{\hoket}{\ket{\phi}}
+\newcommand{\hoep}{\ket{\phi +}}
+\newcommand{\hoem}{\ket{\phi -}}
+\newcommand{\pin}{\psi_\text{in}}
+\newcommand{\pout}{\psi_\text{out}}
+\newcommand{\kpin}{\ket{\psi_\text{in}}}
+\newcommand{\kpout}{\ket{\psi_\text{out}}}
+\newcommand{\mop}{\Omega_{+}}
+\newcommand{\mom}{\Omega_{-}}
+\newcommand{\melt}[3]{\left|\mel{#1}{#2}{#3}\right|^{2}}
+\newcommand{\scat}{\mathcal{S}}
+\newcommand{\mscat}{\(\scat\)}
+\newcommand{\oop}[1]{\mathcal{#1}}
+\newcommand{\moop}[1]{\(\oop{#1}\)}
+\renewcommand{\vu}[1]{\mathbf{\hat{\text{$#1$}}}}
+
+\subsection{Effective Field Theory}
+
+The quantum field theory developed in the 1930s and 1940s had
+The formalism of computing Feynman diagrams led to difficulties when working
+with loops. Infinities pop up left, right and center, giving nonsensical
+results. A formalism was developed by Feynman, Schwinger, Tomonaga and Dysin [ref] to nevertheless obtain sensible values
+through systematically canceling infinities. Despite the impressive agreement with
+experiments [ref], many [who?] felt icky about the method, afraid it was nothing
+more but a mathematical trick, and our failure to understand it implied a
+failure to understand the physical significance.
+
+It wasn't before 1970s[when?] that Ken Wilson, an otherwise unknown physicist,
+illuminated the issue [ref]. The loop diagrams gave infinities because one has to sum
+over all possible [diagrams. clumsy structure, rewrite], for all energies. However, we do not know
+that QFT is the correct theory for high energy physics, nor is it necessary to
+assume so in order to do calculations at lower energies. One can instead set an
+arbitrary[not practically arbitrary, make clearer] limit \(\Lambda\) above which
+is the high energy, or \textit{ultraviolet} (UV), regime, and below which is the low
+energy, or \textit{infrared} (IR), regime [det ble nøstes. nøst opp]. Ken Wilson
+argued it is better we admit the physics of UV is unknown and treat it as such,
+and instead develop a low energy model. That the physics of UV is irrelevant can
+be seen from the fact that any low energy model has many consistent high energy
+models, or \textit{completions} [ref]. This gave rise to \textit{effective field
+  theories} (EFT).
+
+A more or less general procedure was developed to generate an EFT\cite[p.~7]{Machleidt_2011}:
+\begin{enumerate}
+\item  Identify the soft and hard scales, and the degrees of freedom appropriate
+  for (low-energy) nuclear physics.
+\item Identify the relevant symmetries of low-energy QCD and investigate if and how they are broken.
+\item Construct the most general Lagrangian consistent with those symmetries and symmetry breakings.
+\item Design an organizational scheme that can distinguish between more and less important contributions:
+  a low-momentum expansion.
+\item Guided by the expansion, calculate Feynman diagrams for the problem under consideration to the
+  desired accuracy.
+\end{enumerate}
+[seems out of place, as all steps except 5. are intractable by me]
+
+\subsection{The Chiral Lagrangian}
+
+In QCD the Lagrangian is\cite[p.~7]{Machleidt_2011}
+
+\begin{equation*}
+  \mathcal{L}_{\text{QCD}} = \bar{q}(i\gamma^{\mu}\mathcal{D}_{\mu} - \mathcal{M})q
+  - \frac{1}{4}\mathcal{G}_{\mu\nu,a}\mathcal{G}^{\mu\nu}_{a}
+\end{equation*}
+with \(\mathcal{D}_{\mu} = \partial_{\mu} - i
+g\frac{\lambda_{a}}{2}\mathcal{A_{\mu},a}\) the gauge-covariant derivative,
+\(\mathcal{G}_{\mu\nu,a}\) the gluon field strength tensor, \(q\) the quark
+fields and \(\mathcal{M}\) the quark mass matrix.
+
+[vanishing quark mass]
+
+[short about chiral symmetry]
+
+[explicit and spontaneous symmetry breaking]
+
+[chiral effective Lagrangian]
+
+
+In QCD the u  and d quarks have approximately chiral symmetry.
+Explicelty broken because u and d do not have the same mass
+Spontaneously broken
+
+Rekkeutvikling av Lpipi
+
+Chiral order
+
+\subsection{One Pion Exchange Force}
+
+We obtain
+
+\begin{equation*}
+  V(\vec{r}) = \frac{f_{\pi}^{2}}{m_{\pi}^{2}}\left[ C_{\sigma}\sigma\cdot\sigma_{2} \right]
+\end{equation*}
+
+\begin{equation*}
+  V^{LO}(\vec{q}, \vec{k}) = C_{s} + C_{t}\vec{\sigma_{a}}\cdot\vec{\sigma_{2}}
+\end{equation*}
+
+\begin{equation*}
+  V^{NLO}(\vec{q}, \vec{k}) = C_{1}\vec{q}^{2} + C_{2}\vec{k}^{2} + \vec{\sigma}_{1}\cdot\vec{\sigma}_{2}
+  + iC_{5}\frac{\vec{\sigma}_{1}+\vec{\sigma}_{2}}{2}\cdot\vec{q}\times\vec{k}
+  + C_{6}\vec{q}\cdot\vec{\sigma}_{1}\vec{q}\cdot\vec{\sigma}_{2}
+  + C_{7}\vec{k}\cdot\vec{\sigma}_{1}\vec{k}\cdot\vec{\sigma}_{2}
+\end{equation*}
+
+where \(\vec{q} = \vec{p} - \vec{p}^{\prime}\) is the momentum transfer, \(\k =
+\frac{\vec{p}+\vec{p}^{\prime}}{2}\) the average momentum, and \(\vec{p}\) and
+\(\vec{p}^{\prime}\) the relative momenta.
+
+
+[Regularization]
+\begin{equation*}
+  V(p^{\prime}, p)
+  \xlongrightarrow[\text{regularize}]{} f_{\Lambda}(p^{\prime})V(p^{\prime}, p)f_{\Lambda}(p)
+\end{equation*}
+where [why? Fourier transform trick]
+\begin{equation*}
+  f_{\Lambda}(p) = \exp{-p^{4}/Lambda^{4}}
+\end{equation*}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% TeX-engine: xetex
+%%% End:

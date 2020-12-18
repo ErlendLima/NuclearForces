@@ -1,0 +1,57 @@
+%---------------- custom style -----------------------
+%----- equation numbering -------
+\numberwithin{equation}{section}     % number within section
+%\numberwithin{equation}{subsection} % number within subsection
+
+%----- fig & table numbering -----
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+%-------- header & foot -------- 
+% FILL IN APPROPRIATE DESCRIPTIONS
+% title page
+\pagestyle{fancy}
+\fancypagestyle{firststyle}
+{
+   \fancyhf{}
+   \fancyfoot[C]{
+   GitHub repository: 
+   \url{https://github.com/ErlendLima/NuclearForces} 
+   }
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0.4pt}
+}
+% rest of document
+\fancyhead[L]{\small Nuclear Forces} 
+\fancyhead[C]{\small Project 2} 
+\fancyhead[R]{\small \today}
+\fancyfoot[C]{-- \thepage\ --}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%---------- insert custom LaTeX commands ----------
+\newcommand*{\QED}{\hfill\ensuremath{\square}}
+%usage: \QED
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+%usage: \BigO{foo}
+\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}} 
+%running fraction with slash. usage: $\rfrac{a}{b}$
+
+%----------- New Commands --------------
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\ShadeCell[4][0pt]{%
+  \begin{tikzpicture}[overlay,remember picture]%
+    \shade[#4] ( $ (pic cs:#2) + (0pt,1.9ex) $ ) rectangle ( $ (pic cs:#3) + (0pt,-#1*\baselineskip-.8ex) $ );
+  \end{tikzpicture}%
+}%
+
+
+\newcommand\HatchedCell[4][0pt]{%
+  \begin{tikzpicture}[overlay,remember picture]%
+    \fill[#4] ( $ (pic cs:#2) + (0,1.9ex) $ ) rectangle ( $ (pic cs:#3) + (0pt,-#1*\baselineskip-.8ex) $ );
+  \end{tikzpicture}%
+}%
+
+\newcommand*{\hatch}[2]{\multicolumn{#2}{!{\hspace*{-0.4pt}\tikzmark{start#1}}c!{\tikzmark{end#1}}}{}}
+\newcommand{\rom}{}

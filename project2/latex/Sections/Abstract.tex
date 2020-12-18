@@ -1,0 +1,26 @@
+%\abstractintoc % Add abstract to Table of Contents 
+%\abstractnum   % Format abstract like a chapter
+                % Remove if abstract should not be on its own page
+
+\makeatletter
+\renewenvironment{abstract}{%
+    \if@twocolumn
+      \section*{\abstractname}%
+    \else %% <- here I've removed \small
+      \begin{center}%
+        {\bfseries \large\abstractname\vspace{\z@}}%  %% <- here I've added \Large
+      \end{center}%
+      \quotation
+    \fi}
+    {\if@twocolumn\else\endquotation\fi}
+\makeatother
+
+\begin{abstract}
+
+\end{abstract}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% TeX-engine: xetex
+%%% End:

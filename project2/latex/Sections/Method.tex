@@ -1,0 +1,174 @@
+\section{Method}\label{sec:Method}
+
+
+\subsection{Code Implementation}
+Extending the previous \textsf{Scattering.jl} library to handle the potentials
+spawned by effective field theory is a simple matter. Each potential corresponds
+to a struct with the necessary coefficients, along with a callable method for
+evaluating the potential. These are shown in~\cref{lst:eftpotential}.
+
+
+\begin{listing}
+\begin{minted}[linenos,mathescape=true,fontsize=\tiny,breaklines,escapeinside=||]{julia}
+#= EFT Potentials =#
+#= Lowest leading order pionless EFT potential =#
+struct LO <: Potential
+    C₀::Float64
+end
+
+function (V::LO)(k, k′)
+    V.C₀
+end
+
+#= Next leading order pionless EFT potential =#
+struct NLO <: Potential
+    C₀::Float64
+    C₂::Float64
+end
+
+function (V::NLO)(k, k′)
+    V.C₀ + V.C₂*(k^2 + k′^2)
+end
+
+#= Next next leading order pionless EFT potential =#
+struct NNLO <: Potential
+    C₀::Float64
+    C₂::Float64
+    C₄::Float64
+end
+
+function (V::NNLO)(k, k′)
+    V.C₀ + V.C₂*(k^2 + k′^2) + V.C₄*(k^4 + k′^4) + V.C₄*k^2*k′^2
+end
+
+
+#= Pion interaction =#
+struct Pion <: Potential
+    mπ::Float64
+    Vπ::Float64
+end
+Pion(Vπ::Real) = Pion(0.7, Vπ)
+
+function (V::Pion)(k, k′)
+    mπ = V.mπ
+    V.Vπ/(4mπ * k*k′) * log((mπ^2 + (k+k′)^2)/(mπ^2 + (k-k′)^2))
+end
+
+\end{minted}
+\caption{Implementation of the EFT potentials.\label{lst:eftpotential}}
+\end{listing}
+
+Adding one-pion exchange term to the pionless potentials is done by a combining
+a pionless potential with the one-pion exchange potential through a
+\textsf{CompoundPotential}, its implementation shown in~\cref{lst:compoundpotential} 
+
+
+\begin{listing}
+\begin{minted}[linenos,mathescape=true,fontsize=\tiny,breaklines,escapeinside=||]{julia}
+struct CompoundPotential <: Potential
+    V1::Potential
+    V2::Potential
+end
+
+function(V::CompoundPotential)(r)
+    V.V1(r) + V.V2(r)
+end
+
+function(V::CompoundPotential)(k, k′)
+    V.V1(k, k′) + V.V2(k, k′)
+end
+
++(V1::Potential, V2::Potential)::Potential = CompoundPotential(V1, V2)
+
+\end{minted}
+\caption{CompoundPotential used to add a pionic term to a pionless potential,
+among other uses.\label{lst:compoundpotential}}
+\end{listing}
+
+Finally, a potential can be regularized with the smooth UV regulator [ref] by
+sandwiching a potential with the \(f_{\Lambda}\) factors, as implemented in~\cref{lst:uvregulator}.
+
+\begin{listing}
+\begin{minted}[linenos,mathescape=true,fontsize=\tiny,breaklines,escapeinside=||]{julia}
+#= UV Regulatization =#
+struct UVRegulator <: Potential
+    V::Potential
+    Λ::Float64  # Cutoff parameter [fm⁻¹]
+end
+
+function (V::UVRegulator)(k, k′)
+    exp(-k^4/V.Λ^4) * V.V(k, k′) * exp(-k′^4/V.Λ^4)
+end
+\end{minted}
+\caption{Regularization is too a \textsf{Potential} wrapped around another \textsf{Potential}.\label{lst:uvregulator}}
+\end{listing}
+
+\subsection{Minimization Procedure}
+
+[fix. Modern works are much more detailed]Earlier works on the same topic [ref lepage,machleidt,more] often skimp on
+detailing the methods used
+to obtain the coefficients for the potentials. As a counterweight, the following is
+a detailed explanation of the minimization employed here.
+
+[This section may be rewritten once I've understood EKM]
+
+Potentials derived from effective field theory are most accurate at low
+energies, i.e. the low infrared region. By construction, a fit here should give
+the best overall fit for all energies in the infrared region. However, the phase
+shift of the Reid potential is near linear for \(E<5\) MeV, before the peak. The
+more degrees of freedom a parameterized potential has, the more trouble minimization
+procedures will have in finding good coefficients that generalize without
+being able to see more features. It is therefore to expect that potentials with
+more degrees of freedom require data from higher and higher energies to perform
+a good fit.
+
+Fitting to higher energies is undesirable as the EFT potentials quickly break
+down. To find an optimal fit it is therefore necessary to let the final energy
+\(E_{\mathrm{end}}\) used in the fit be a free parameter which itself is
+optimized. In addition, a bias is introduced to weight the low energy points
+more by using logarithmically spaced points.
+
+Any form of fitting procedure require a measure of the error. A common measure
+is the square of the residuals, \(\left( y_{i} - \mathrm{fit}_{i} \right)^{2}\), used
+in least squares and \(\chi^{2}\) minimization. This is not necessarily optimal
+for our problem because the potentials derived from EFT are asymptotically good
+as \(k\to 0\), and so one would expect the fit to get progressively worse as the
+energy increases. Using the square of the residuals the error at high energies
+will then weight considerably more
+than the error at low energies, biasing the fit for a better ``global'' fit. A
+better choice might be to use the absolute error of the residuals
+\(|y_{i}-\mathrm{fit}_{i}|\), or the relative error
+\(\frac{|y_{i}-\mathrm{fit}_{i}|}{y_{i}}\).
+Doing so runs the cost of slower minimization as many solvers rely on the
+properties of the square of residuals to perform their minimization. 
+
+This sends us to the problem of which minimization procedure to use. As we are
+using the Reid potential as the Truth, we need not care for empirical errors,
+only about obtaining a good fit in a reasonable amount of time. This turns out
+to be substantially more difficult that what it seems at face value. There are
+two reasons for this. The first is that the parameter space increases rapidly
+from \(1\) for LO to \(4\) with \(\mathrm{NNLO}\). Letting \(\Lambda\) vary adds
+another parameter, and so does adding a pionic interaction. Not only does this
+make the solution space more shallow[ref bayes], it also introduces several
+local minima. Having obtained one solution, one can not set aside the fear that
+the solution is suboptimal, and many methods make it difficult to measure how
+much of the parameter space one has explored. Trials showed that gradient-based
+methods easily get stuck and many methods using exorbitant amount of time to
+obtain convergence. Simulated annealing[ref] found very good fits, but only
+after running for hours.
+
+Another problem arises from the K-matrix method used to compute the phase shift.
+There is an inherent limitation to the method as the computation of \(\delta\)
+perform an \(\atan\), setting an upper bound of \(\pi/2\). Unfortunate values of
+the parameters or their combination lead
+
+
+[Holding \(\Lambda\) constant]
+
+[Region of fit]
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% TeX-engine: xetex
+%%% End:

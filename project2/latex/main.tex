@@ -1,0 +1,82 @@
+%-------------------- begin preamble ----------------------
+%\documentclass[12pt]{article}
+\documentclass[12pt, a4paper, abstracton]{scrartcl}
+%\setkomafont{disposition}{\normalfont\bfseries}
+\usepackage{Setup/style}
+\input{Setup/macros}
+\addbibresource{bibliography.bib}   % Bibliography
+ %---------- included files ------------------------
+\includeonly
+{
+    Sections/Frontpage,
+    Sections/Abstract,
+    Sections/Introduction,
+    Sections/Theory, 
+    Sections/Methods,
+    Sections/Results,
+    %Sections/Discussion,
+    Sections/Conclusion,
+    %Sections/Future,
+    Appendix,
+}
+
+%-------------------- end preamble ----------------------
+
+%-------------------- main content ----------------------
+\begin{document}
+
+
+%------------------ title -------------------------
+\input{Sections/Frontpage}
+
+\pagenumbering{gobble}
+\thispagestyle{firststyle}
+
+%---------------- abstract -------------------------
+\input{Sections/Abstract}   % Abstract on title page
+\newpage
+
+%------------ content overview ---------------------
+\frontmatter      % Folios in Roman numerals
+\tableofcontents    
+%\listoffigures      
+%\listoftables       
+%\listofalgorithms
+
+%----------------- body ----------------------------
+%-------- guide -----------
+%\include{filename}  Force a page-break
+%\input(filename}    Do not force a page-break
+%--------------------------
+%\listoftodos       % list TODOs
+\mainmatter         % Folios in Arabic numerals
+\input{Sections/Introduction}
+\newpage
+\input{Sections/Theory}
+\FloatBarrier
+\newpage
+\input{Sections/Method}
+\FloatBarrier
+\newpage
+\input{Sections/Results}
+%\input{Sections/Discussion}
+\newpage
+\input{Sections/Conclusion}
+%\input{Sections/Future}
+ 
+%-------- bibliography ----------- 
+\FloatBarrier
+\newpage 
+\printbibliography 
+
+%-------- appendix -----------
+%\appendix
+%\include{Appendix}
+
+\end{document}
+% ------------------- end of main content ---------------
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% End:

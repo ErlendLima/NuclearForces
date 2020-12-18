@@ -57,3 +57,131 @@ Jeg har slitt mentalt den siste tiden
 Jeg har fortsatt ikke fått gjort ferdig spesialpensum, selv med hele sommeren på
 meg. Det er bare så himmla teit
   
+
+* Notat pt2
+   Start with pionless EFT. Longest range piece of the potential is unresolved.
+   EFT is just a series of contact potentials. Range of effective range expansion
+   valid up to an onshell momentum k~mpi/2 = 10 MeV lab energy. 
+   Lowest pionless interaction
+          VLO(q,p) = C0
+   p 32-33 of Machleidt
+   
+   Potential gives UV divergences if used in LS. Use a smooth UV regulator
+         V(q, p) => fLambda(q)V(q,p)fLambda(p)
+   * Pick appropriate value for lambda and fit C0
+     
+
+   Add NLO and NNLO. Fit C0, C2, C4, C4'. 
+   * Plot LO, NLO, NNLO and compare to p1.
+   * Make fig 3 in lepage
+   * Pick breakdown scale lambda_b where EFT stops impriving
+   * Make fig 4 in lepage. Explain dependence on Lambda and Lambdab
+  Pionless EFT reproduces the physics of effective range expansion, expect
+  lambda_b approx m_pi. Sets the scale of the longest ranged yukawa term.
+  * Redo a-b with pion term, modifying lambda to an appropriate value.
+    Expect lambda_b to be at a higher value, roughly equal to the mass of
+    the next heaviest Yukawa term.
+  * Redo 2c, the cutoff dependence
+
+* Fit parameters
+** 0.1 MeV
+   *** NLO
+ * Candidate solution
+    Final objective value:     2.700915e-04
+
+ * Found with
+    Algorithm:     SAMIN
+
+ * Convergence measures
+    |x - x'|               = NaN ≰ 0.0e+00
+    |x - x'|/|x'|          = NaN ≰ 0.0e+00
+    |f(x) - f(x')|         = NaN ≰ 0.0e+00
+    |f(x) - f(x')|/|f(x')| = NaN ≰ 0.0e+00
+    |g(x)|                 = NaN ≰ 0.0e+00
+
+ * Work counters
+    Seconds run:   1516  (vs limit 1800)
+    Iterations:    80051
+    f(x) calls:    80051
+    ∇f(x) calls:   0
+, [-0.5400927768854299, 0.04593368271175204])
+   LBFGS only finds -0.53, 0.03
+
+
+   Another solution:
+ * Candidate solution
+    Final objective value:     3.870819e-03
+
+ * Found with
+    Algorithm:     Particle Swarm
+
+ * Convergence measures
+    |x - x'|               = NaN ≰ 0.0e+00
+    |x - x'|/|x'|          = NaN ≰ 0.0e+00
+    |f(x) - f(x')|         = NaN ≰ 0.0e+00
+    |f(x) - f(x')|/|f(x')| = NaN ≰ 0.0e+00
+    |g(x)|                 = NaN ≰ 1.0e-08
+
+ * Work counters
+    Seconds run:   241  (vs limit 240)
+    Iterations:    249
+    f(x) calls:    12700
+    ∇f(x) calls:   0
+, [-0.5428064060592137, 0.059616093970752466])
+
+ * Candidate solution
+    Final objective value:     7.773655e-03
+
+ * Found with
+    Algorithm:     Particle Swarm
+
+ * Convergence measures
+    |x - x'|               = NaN ≰ 0.0e+00
+    |x - x'|/|x'|          = NaN ≰ 0.0e+00
+    |f(x) - f(x')|         = NaN ≰ 0.0e+00
+    |f(x) - f(x')|/|f(x')| = NaN ≰ 0.0e+00
+    |g(x)|                 = NaN ≰ 1.0e-08
+
+ * Work counters
+    Seconds run:   601  (vs limit 600)
+    Iterations:    302
+    f(x) calls:    30503
+    ∇f(x) calls:   0
+, [-0.5462310625489469, 0.07693822069153569])
+
+  BBOptim seems to find the best solution:
+  Best candidate found: [-0.540093, 0.0459337]
+
+  Fitness: 0.000270091
+** 1 MeV
+   *** NLO
+       Annealing in [-1, -1] [1, 1] [-0.5, 0.5] loss 1.2e-3, 1555 sec conv
+       [-0.53702320331934, 0.030541556807411496] 
+   *** NNLO
+       Seems to be several local minima where it is easy to get stuck.
+ * Candidate solution
+    Final objective value:     1.134094e-02
+
+ * Found with
+    Algorithm:     SAMIN
+
+ * Convergence measures
+    |x - x'|               = NaN ≰ 0.0e+00
+    |x - x'|/|x'|          = NaN ≰ 0.0e+00
+    |f(x) - f(x')|         = NaN ≰ 0.0e+00
+    |f(x) - f(x')|/|f(x')| = NaN ≰ 0.0e+00
+    |g(x)|                 = NaN ≰ 0.0e+00
+
+ * Work counters
+    Seconds run:   3391  (vs limit 7200)
+    Iterations:    160401
+    f(x) calls:    160401
+    ∇f(x) calls:   0
+, [-0.5450058383260756, 0.10739601096353377, 0.002847804378870855, -0.7532750321029799])
+  rt = 0.99
+ * Work counters
+    Seconds run:   7200  (vs limit 7200)
+    Iterations:    342808
+    f(x) calls:    342808
+    ∇f(x) calls:   0
+, [-0.540098728827698, -0.05414519007866481, 0.30582883298169583, 0.4771116809792675])
