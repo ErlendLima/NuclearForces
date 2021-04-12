@@ -1,5 +1,60 @@
 \section{Introduction}
 
+\epigraph{[It was] a whole new world. It was as if, suddenly, we had broken into
+  a walled orchard, where protected trees flourished and all kinds of exotic
+  fruits had ripened in great profusion.}{\textit{Cecil F. Powell \\ on the
+    discovery of the pion\cite{powell}}} 
+
+\subsection{Early Models on the Nuclear Force}
+
+The onset of quantum theory in the 1920s laid the foundation for
+understanding the interactions between nucleons from first principles. There
+were difficulties in explaining how the nucleus kept together under the
+repulsion between the protons, and in developing a formalism to understand the
+nucleus. A
+breakthrough came in 1935 when Hideki Yukawa proposed his meson theory,
+where he used then-modern field calculations to predict the
+existence of mesons\cite{Yukawa}. He proposed an attractive force between the nucleons
+mediated by mesons, stemming from the residual strong force of the underlying quark
+structure\footnote{This is a modern interpretation as Yukawa's paper was more
+  focused on applying field theory to compute the mass of the meson(s).}. 
+The success of Yukawa theory was solidified by the
+later discovery of the \(\pi\)-meson\cite{LATTES1947} and heavier (\(\rho\), \(\omega\),
+...) mesons\cite{PhysRevLett.6.628}.
+
+Later work on pion theories in the 1950s had modest success with explaining
+nucleon-nucleon (NN) scattering and properties of the deuteron involving one-pion
+exchange, while multiple-pion exchange failed to produce reasonable
+results\cite[p.~4]{10.1143/PTP.16.604,MACHLEIDT19871}. The discovery of heavier mesons during the 1960s motivated
+one boson exchange models (OBE), models that still are of use today. There
+were a plethora of nucleon potentials developed on these ideas (Stony
+Brook\cite{JACKSON1975397}, Paris\cite{PhysRevC.21.861}, Bonn\cite{MACHLEIDT19871}), and the nucleon
+force problem appeared to have been satisfyingly solved.
+
+Alas, the development of quantum chromo-dynamics (QCD) in 1970s revealed that
+the mesons themselves could be derived from more fundamental principles, and the work on
+establishing the theoretical framework for nuclear interactions from first principles started 
+all over again. Taking the low energy limit of QCD and exploiting chiral
+symmetry lead to chiral perturbation theory (ChPT), an effective field theory which has achieved unprecedented
+accuracy in modeling low energy nuclear potentials.
+
+\subsection{Overview}
+The goal of this text is to calculate the phase shift of \(^{1}S_{0}\) partial
+waves of \(np\)-scattering using potentials inspired by ChPT. The potentials
+are fitted to low energy phase shifts of the Reid68 potential and compared to
+its high energy phase shifts.
+
+We will begin with a rudimentary exposition of ChPT and present the nuclear
+potentials that we will examine: LO, NLO and NNLO. Their form is sightly changed
+by only including a one-pion exchange term modeled after the heaviest Yukawa
+term of the Reid68 potential, thereby being simpler than the proper ChPT
+potentials. In the methods section their numerical implementation are 
+presented, and a fitting procedure is developed to fit the potentials to low
+energy phase shifts. This turns out to be a tricky affair, requiring some care. Finally, phase shifts
+are computed for larger energies and compared to the ``true'' phase shifts from
+Reid68 and results of Lepage.
+
+
 %%%   Local Variables:
 %%%   mode: latex
 %%%   TeX-master: "../main"

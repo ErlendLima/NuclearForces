@@ -185,3 +185,30 @@ meg. Det er bare så himmla teit
     f(x) calls:    342808
     ∇f(x) calls:   0
 , [-0.540098728827698, -0.05414519007866481, 0.30582883298169583, 0.4771116809792675])
+
+* Notat 3
+** The couplings are equivalent to the multipole moments
+** Contact terms mimic the short range behavior.
+** Pion terms mimic the long range behavior
+** Coupling constants must compensate. running
+** Coupling constants vary alot when the short range potential is strong
+** When the cutoff is very large, larger than the long range potential or if the
+   the long range potential is missing, the coefficients will tend to a constant
+** Cutoff too short -> wavelengths too long to probe the true structure of the potential
+   Often introduce non-linearity in the coefficients, may become untuneable
+** Why tune at low energies? Minimize effect of a^6 (ogslike) large error behavior
+** We restrict ourselves to np scattering to avoid pp Coloumb
+** Phase shifts are not really data - they must be extracted through some theoretical procedure.
+   Experimental errors are difficult to interpet
+** Lepage sjekker \Lambda fra 50 til 400 MeV
+** Compare different terms as done in Lepage fig 7
+** Expect powers to grow by \Lambda² because that is how the powers of p in the terms are.
+    If NLO grows like E^(0.5), expect NNLO to grow like E^(0.5+2)
+** Lepage doesn't fit as low as me, approx 0.2
+** Our omitted 2pion terms are of the same order as p4
+   We expect? that err(2pion) < err(1pion)
+** Lepage 350 MeV, 150 MeV without pion. Tuned at 0.1 MeV
+** Values of the coupling coefficients can in principle be derived from QCD
+    
+
+  
